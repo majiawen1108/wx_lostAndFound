@@ -1,0 +1,93 @@
+.container {
+  /* overflow: hidden; */
+  padding: 0;
+  margin: 1rpx;
+  background-color: #f0f0f0;
+  /* border: 1px solid black; */
+}
+
+.page-info-img {
+  width: 28%;
+  float: left;
+}
+
+.page-info-img .image {
+  height: 235rpx;
+  width: 100%;
+  border-radius: 20rpx;
+}
+
+.page-info-msg {
+  width: 72%;
+  float: left;
+}
+
+.title {
+  font-size: 33rpx;
+  margin-left: 25rpx;
+  font-family: 华文中宋;
+}
+
+.title1 {
+  float: left;
+  font-size: 30rpx;
+  margin: 25rpx;
+  color: #989898;
+}
+
+.title2 {
+  margin-left: 25rpx;
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: #f90;
+}
+
+.title3 {
+  float: left;
+  font-size: 30rpx;
+  margin: 25rpx;
+  color: #989898;
+}
+
+.title3.active {
+  float: left;
+  font-size: 30rpx;
+  margin: 25rpx;
+  color: #f80000;
+}
+
+.product-list .product-item {
+  position: relative;
+  width: 100vw;
+  border-bottom: 2rpx solid #e9e9e9;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 999;
+}
+
+.product-list .product-item movable-area {
+  height: 240rpx;
+  width: calc(100vw - 120rpx);
+}
+
+.product-list .product-item movable-view {
+  height: 240rpx;
+  width: 100vw;
+  background: #fff;
+  z-index: 999;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 120rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 240rpx;
+  z-index: 1;
+  background: #e66671;
+  text-align: center;
+}

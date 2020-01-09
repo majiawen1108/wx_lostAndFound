@@ -1,0 +1,13 @@
+<!--pages/sendMsg/sendMsg.wxml-->
+<!-- <text>这个页面是发布信息页面</text> -->
+<view class="all">
+  <view class="push" bindtap="push"> 
+      <view class="push-title" >发布拾物</view>
+  </view>
+  <view class="search" bindtap="search">
+      <view class="search-title">发布失物</view> 
+  </view>
+  <view class="footer">
+    诚者，天之道也；思诚者，人之道也 ——《孟子》
+  </view>
+</view>

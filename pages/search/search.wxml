@@ -1,0 +1,83 @@
+<view class="all">
+  <view class="top">
+    祝您早日寻得心爱之物❤
+  </view>
+  <view class="middle">
+    <form bindsubmit='subPush'>
+      <view class="">
+        <text>标题:</text>
+        <input name="found_title" type="text" />
+      </view>
+      <view class="">
+        <text>物品分类:</text>
+        <!-- 下拉框 -->
+        <view class='top-selected' bindtap='bindShowMsg'>
+          <text name="found_category">{{grade_name}}</text>
+          <image src='../../images/down.jpg'></image>
+        </view>
+        <!-- 下拉需要显示的列表 -->
+        <view class="select_box" wx:if="{{select}}">
+          <view wx:for="{{grades}}" wx:key="unique">
+            <view class="select_one" bindtap="mySelect" data-name="{{item}}">{{item}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="middle-detail" style="height: 400rpx;">
+        <text>详情:</text>
+        <textarea name="found_details" id="" cols="30" rows="20"></textarea>
+      </view>
+      <view class="">
+        <text>标签:</text>
+        <input name="found_tag" type="text" />
+      </view>
+      <view class="">
+        <picker mode="date" value="{{found_date}}" start="2019-01-01" end="" bindchange="bindDateChange">
+          <text>丢失日期:</text>
+          <input name="found_date" type="text" value="{{found_date}}" disabled="true" placeholder="点击选择你需要的日期" />
+        </picker>
+      </view>
+      <view class="">
+        <text>丢失地区:</text>
+        <input name="found_address" type="text" />
+      </view>
+      <view class="">
+        <text>详细地址:</text>
+        <input name="found_det_address" type="text" />
+      </view>
+      <view class="">
+        <text>证件地址:</text>
+        <input name="id_address" type="text" />
+      </view>
+      <view class="">
+        <text>证件后四位:</text>
+        <input name="found_id" type="text" />
+      </view>
+      <view class="">
+        <text>失主姓名:</text>
+        <input name="" type="text" />
+      </view>
+      <view class="">
+        <text>发布人姓名:</text>
+        <input name="found_name" type="text" />
+      </view>
+      <view class="">
+        <text>发布人联系方式:</text>
+        <input name="found_tel" type="text" />
+      </view>
+      <view class="">
+        <text>发布人QQ:</text>
+        <input name="found_QQ" type="text" />
+      </view>
+      <view>
+        <text>发布人微信:</text>
+        <input name="found_wx" type="text" />
+      </view>
+      <button formType="submit" type='primary' class="middle-btn">立即发布</button>
+    </form>
+  </view>
+  <view class="footer">
+
+    注意：有可能会有冒领者打电话联系您，谎称他（她）是物品的主人， 而且他所描述的物品丢失时间、地点 与你拾获物品的时间地点非常吻合，也能描述该物品的基本信息， 例如颜色，包裹内含有物品等，向您认领物品， 但有可能他只是个冒领者，从本站看到你发布的信息而已， 一定要在归还物品的时候对认领者做好真实性的验证。
+
+  </view>
+</view>

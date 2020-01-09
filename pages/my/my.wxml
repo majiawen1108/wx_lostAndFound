@@ -1,0 +1,39 @@
+<view class="all">
+  <view class="my-up">
+    <view class="up-image">
+      <!-- <image src="../../images/lost1.jpg"></image> -->
+      <image class="" src="{{userInfo.avatarUrl}}" mode="cover">
+      </image>
+    </view>
+    <view class="up-msg">
+      <view class="msg1">
+        <text>{{userInfo.nickName}}</text>
+      </view>
+      <view class="msg2">
+        <text>City：{{userInfo.city}}/{{userInfo.country}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="my-down">
+    <navigator url="#">
+      <view class="my-send" bindtap="minepush">
+        <text>我发布的失物招领</text>
+      </view>
+    </navigator>
+    <navigator url="#">
+      <view class="my-send">
+        <text>我发布的寻物招领</text>
+      </view>
+    </navigator>
+    <navigator url="#">
+      <view class="my-send">
+        <text>帮助</text>
+      </view>
+    </navigator>
+    <navigator url="#">
+      <view class="my-send">
+        <text>退出登录</text>
+      </view>
+    </navigator>
+  </view>
+</view>

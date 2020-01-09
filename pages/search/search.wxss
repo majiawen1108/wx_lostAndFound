@@ -1,0 +1,125 @@
+text {
+    font-family: 黑体;
+    line-height: 100rpx;
+    font-size: 30rpx;
+}
+
+.all {
+    width: 100%;
+    height: 100%;
+}
+
+.top {
+    width: 100%;
+    height: 100rpx;
+    /* background-color: blue; */
+    line-height: 100rpx;
+    text-align: center;
+    font-family: 隶书;
+    font-size: 40rpx;
+}
+
+.middle {
+    padding: 20rpx;
+}
+
+.middle-detail {
+    overflow: hidden;
+}
+
+.middle-btn {
+    margin-top: 30rpx;
+    width: 400rpx;
+    height: 80rpx;
+    /* background-color: #FF9900; */
+    line-height: 80rpx;
+    font-size: 35rpx;
+    /* text-align: center; */
+}
+
+.middle view {
+    /* height: 100rpx; */
+    border-bottom: 2rpx solid#E0E0E0;
+}
+.middle select{
+  float: right;
+  height: 50rpx;
+}
+.middle input {
+    /* max-width:70%; */
+    display: inline-flex;
+    margin-left: 20rpx;
+    font-size: 32rpx;
+    color: #B8B8B8;
+}
+
+
+/* .middle input::-webkit-input-placeholder {
+    text-align: center;
+} */
+
+.middle textarea {
+    width: 100%;
+
+}
+
+.footer {
+    width: 710rpx;
+    height: 300rpx;
+    font-size: 25rpx;
+    padding: 20rpx;
+    color: firebrick;
+    /* background-color: brown; */
+}
+
+/* 下拉框 */
+.top-selected{
+    width: 50%;
+    display: flex;
+    float: right;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid #ccc; */
+    padding: 0 10rpx;
+    font-size: 30rpx;
+}
+/* 下拉内容 */
+.select_box {
+    background-color: #fff;
+    padding: 0 20rpx;
+    width: 50%;
+    float: right;
+    position: relative;
+    right: 0;
+    z-index: 1;
+    overflow: hidden;
+    text-align: left;
+    animation: myfirst 0.5s;
+    font-size: 30rpx;
+}
+.select_one {
+    padding-left: 20rpx;
+    width: 100%;
+    height: 60rpx;
+    position: relative;
+    line-height: 60rpx;
+    border-bottom: 1px solid #ccc;
+}
+/* 下拉过度效果 */
+@keyframes myfirst {
+    from {
+        height: 0rpx;
+    }
+ 
+    to {
+        height: 250rpx;
+    }
+}
+/* 下拉图标 */
+.top-selected image{
+  height:50rpx;
+  width:50rpx;
+  position: absolute;
+  right: 50rpx;
+  top: 245rpx;
+}

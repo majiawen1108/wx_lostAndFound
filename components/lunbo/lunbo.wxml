@@ -1,0 +1,19 @@
+<!--
+  autoplay  自动轮播
+  indicator-dots  是否显示面板指示点
+  indicator-color  指示点颜色
+  indicator-active-color  指示点选中时候的颜色
+  circular  是否采用衔接滑动
+  interval  间隔时间
+ -->
+<swiper autoplay indicator-dots="{{true}}" indicator-color="blue" indicator-active-color="red" circular="{{true}}" interval="2000">
+    <swiper-item>
+      <image class="" mdoe="widthFix" src="../../images/1.jpg"/>
+    </swiper-item>
+    <swiper-item>
+      <image class="" mdoe="widthFix" src="../../images/2.jpg"/>
+    </swiper-item>
+    <swiper-item>
+      <image class="" mdoe="widthFix" src="../../images/3.jpg"/>
+    </swiper-item>
+  </swiper>

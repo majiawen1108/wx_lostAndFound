@@ -1,0 +1,77 @@
+/* pages/my/my.wxss */
+page{
+ background-color: #f8f8f8;
+ overflow: hidden;
+}
+
+
+.my-up {
+  margin-top: 20rpx;
+  width: 95%;
+  height: 300rpx;
+  /* background-color: red; */
+  padding-left: 70rpx;
+  /* border: 1px solid red; */
+  background-color: #fff;
+}
+
+.up-image {
+  width: 200rpx;
+  float: left;
+}
+
+.up-image image {
+  margin-top: 50rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 30rpx;
+}
+
+.up-msg {
+  float: left;
+  margin-top: 30rpx;
+}
+
+.up-msg .msg1 {
+  margin-left: 20rpx;
+}
+
+.up-msg .msg1 text {
+  display: block;
+  width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 50rpx;
+  font-size: 40rpx;
+  text-align: center;
+}
+
+.up-msg .msg2 {
+  margin-left: 70rpx;
+}
+
+.up-msg .msg2 text {
+  margin-top: 70rpx;
+  width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 25rpx;
+}
+
+.my-down {
+  height: 700rpx;
+}
+
+.my-send {
+  margin-top: 50rpx;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background-color: #fff;
+}
+
+

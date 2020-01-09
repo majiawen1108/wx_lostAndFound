@@ -1,0 +1,9 @@
+{
+  
+  "usingComponents": {
+    "meau": "../../components/meau/meau",
+    "lunbo": "../../components/lunbo/lunbo",
+    "searchBar": "../../components/searchBar/searchBar",
+    "home-body": "../../components/home-body/home-body"
+  }
+}

@@ -1,0 +1,9 @@
+<view class="nav_wrap">
+<!-- 自己滚动区域的组件 -->
+<!-- scroll-x就是水平可以滑动 -->
+  <scroll-view class="nav" scroll-x>
+    <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="{{index}}">
+      {{item.text}}
+    </view>
+  </scroll-view>
+</view>

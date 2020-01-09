@@ -1,0 +1,17 @@
+/*导航栏 */
+.nav_wrap{
+  color: #666;
+}
+.nav{
+  white-space:nowrap;
+  padding: 5rpx 0;
+}
+.nav_item{
+  padding: 20rpx 45rpx;
+  font-size: 32rpx;
+  display: inline-block;
+}
+.nav_item.active{
+  border-bottom: 5rpx solid #de688b;
+}
+

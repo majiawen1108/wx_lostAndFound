@@ -1,0 +1,63 @@
+<view class="page">
+  <!-- 侧边栏内容 -->
+  <view class="page-slidebar">
+    <view class="page-content">
+      <view class="wc">
+        <text>选择</text>
+      </view>
+      <view class="wc" bindtap="push">
+        <text>push</text>
+      </view>
+      <view class="wc" bindtap="search">
+        <text>search</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 主页内容 -->
+
+  <!-- （open ? 'c-state' : ''）三元运算符： -->
+  <!-- 1.默认情况下 open 为 false -->
+  <!-- 2.当点击左上角图标的时候或者屏幕向左滑动，open 变化 true -->
+  <!-- 3.当 open 为 true 时，会加上类名为 c-state 和 cover 的 css 样式 -->
+
+  <!-- bindtouchstart、 bindtouchmove、bindtouchend -->
+  <!-- 当手指触摸屏幕并滑动时，所触发的三个函数 -->
+  <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{open ? ['c-state','cover'] : ''}} ">
+    <view wx:if="{{what=='push'}}">
+      <!-- 轮播图的自定义组件 -->
+      <lunbo></lunbo>
+      <!-- 搜索栏 -->
+      <searchBar></searchBar>
+      <!-- <meau></meau> -->
+      <view class="nav_wrap">
+        <!-- 自己滚动区域的组件 -->
+        <!-- scroll-x就是水平可以滑动 -->
+        <scroll-view class="nav" scroll-x>
+          <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="{{index}}">
+            {{item.text}}
+          </view>
+        </scroll-view>
+      </view>
+      <view class="container">
+        <view class="page-info" wx:for="{{list}}" wx:key="{{index}}" bindtap="toOrder" data-num="{{index}}">
+          <!-- <navigator url="../details/details"> -->
+          <view class="page-info-img">
+            <image mode:widthFix class="image" src="{{item.image}}"></image>
+          </view>
+          <!-- </navigator> -->
+          <view class="page-info-msg">
+            <view class="title">{{item.found_title}}</view>
+            <view>
+              <view class="title2">{{item.found_category}}</view>
+              <view class="title1">{{item.found_state}}</view>
+              <view class="title1">{{item.found_date}}</view>
+              <view class="title1">{{item.found_address}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{what=='search'}}">345</view>
+  </view>
+</view>
