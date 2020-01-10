@@ -1,261 +1,220 @@
+// pages/push/push.js
+//获取应用实例
+const app = getApp()
 Page({
 
+  /**
+   * 页面的初始数据
+   */
   data: {
-    open: false,
-    // mark 是指原点x轴坐标
-    mark: 0,
-    // newmark 是指移动的最新点的x轴坐标 
-    newmark: 0,
-    istoright: true,
-    what:'push',
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    num: 0,
-    nickName: '',
-    sex: '',
-    city: '',
-    province: '',
-    country: '',
-
-    list: [],
-    // 设置一个被点击的时候导航栏菜单的索引
-    currentIndexNav: 0,
-    // 首页导航数据
-    navList: [{
-      code: 0,
-      text: "首页"
-    },
-    {
-      code: 1,
-      text: "卡类"
-    },
-    {
-      code: 2,
-      text: "生活"
-    },
-    {
-      code: 3,
-      text: "金钱"
-    },
-    {
-      code: 4,
-      text: "小物件"
-    },
-    {
-      code: 5,
-      text: "大物件"
-    },
+    uploaderList: [],
+    uploaderNum: 0,
+    showUpload: true,
+    image: '',
+    found_title: '',
+    found_category: '',
+    found_state: '未认领',
+    found_date: '',
+    found_address: '未填写',
+    found_id: '',
+    found_lost_name: '未填写',
+    found_tag: '无',
+    found_det_address: '未填写',
+    id_address: '未填写',
+    found_details: '未填写',
+    found_name: '未填写',
+    found_tel: '',
+    found_wx: '',
+    found_QQ: '',
+    def1: '',
+    select: false,
+    pickList: [
+      '卡类',
+      '生活',
+      '金钱',
+      '小物件',
+      '大物件',
     ],
-    queryone: {}
+    pickValue: '',
+    length: 0,
+    note: '',
+    time: 60,
+    showCode: false
   },
-
-  // 点击左上角小图标事件
-  tap_ch: function (e) {
-    if (this.data.open) {
-      this.setData({
-        open: false
-      });
-    } else {
-      this.setData({
-        open: true
-      });
-    }
-  },
-
-  tap_start: function (e) {
-    // touchstart事件
-    // 把手指触摸屏幕的那一个点的 x 轴坐标赋值给 mark 和 newmark
-    this.data.mark = this.data.newmark = e.touches[0].pageX;
-  },
-
-  tap_drag: function (e) {
-    // touchmove事件
-    this.data.newmark = e.touches[0].pageX;
-
-    // 手指从左向右移动
-    if (this.data.mark < this.data.newmark) {
-      this.istoright = true;
-    }
-
-    // 手指从右向左移动
-    if (this.data.mark > this.data.newmark) {
-      this.istoright = false;
-    }
-    this.data.mark = this.data.newmark;
-  },
-
-  tap_end: function (e) {
-    // touchend事件
-    this.data.mark = 0;
-    this.data.newmark = 0;
-    // 通过改变 opne 的值，让主页加上滑动的样式
-    if (this.istoright) {
-      this.setData({
-        open: true
-      });
-    } else {
-      this.setData({
-        open: false
-      });
-    }
-  },
-
-  search:function(){
+  // picker
+  picker: function(e) {
     this.setData({
-      what:'search'
+      pickValue: this.data.pickList[e.detail.value]
     })
   },
-  push: function () {
+  //textarea
+  note: function(e) {
     this.setData({
-      what: 'push'
+      note: e.detail.value,
+      length: e.detail.value.length
     })
   },
-
-
-
-  activeNav(e) {
-    var that = this
-    console.log(e)
-    var i = e.target.dataset.index
-    var found_category = this.data.navList[i].text
-    console.log("found_tag" + found_category)
-    wx.request({
-      url: 'http://localhost/laf/indexbytag.do',
-      data: {
-        found_category: found_category
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        res = res.data
-        console.log(res)
-
-        that.setData({
-          'list': res
-        })
-      },
-      fail: function (res) {
-        console.log("获取数据失败，请检查服务器连接是否正常！");
-      }
-    })
-    this.setData({
-      currentIndexNav: e.target.dataset.index
-    })
-  },
-
-  toOrder: function (e) {
-    this.setData({
-      num: e.currentTarget.dataset.num
-    })
-    var i = this.data.num
-    console.log(i)
-    var queryone = this.data.list[i].id
-    console.log("###id##" + queryone)
-    wx.navigateTo({
-      url: '../details/details?id=' + queryone,
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    var that = this;
-
-    //获取用户的登录信息
-    wx.getUserInfo({
-      success: res => {
-        console.log(res)
-        that.setData({
-          hasUserInfo: true,
-        })
-        var sexx = res.userInfo.gender
-        if (sexx = '1') {
-          sexx = '男'
-        } else {
-          sexx = '女'
-        }
-        wx.request({
-          url: 'http://localhost/laf/index.do',
-          data: {
-            def1: '123',
-            nickName: res.userInfo.nickName,
-            sex: sexx,
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          //一般的POST是这个
-          // header: {
-          //   'content-type': 'application/x-www-form-urlencoded'
-          // },
-          success: function (res) {
-            res = res.data
-            console.log(res)
-
-            that.setData({
-              'list': res
-            })
-
-          },
-          fail: function (res) {
-            console.log("获取数据失败，请检查服务器连接是否正常！");
-          }
-        })
-
-      }
-    })
-
+  onLoad: function(options) {
 
   },
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
-  }
+  },
+  subPush: function(e) {
+    var that = this
+    console.log(e.detail.value)
+    that.setData({
+      found_title: e.detail.value.found_title,
+      image: e.detail.value.image,
+      found_category: e.detail.value.found_category,
+      found_state: e.detail.value.found_state == null ? '未认领' : e.detail.value.found_state,
+      found_date: e.detail.value.found_date,
+      found_address: e.detail.value.found_address == '' ? '未填写' : e.detail.value.found_address,
+      found_id: e.detail.value.found_id == '' ? '未填写' : e.detail.value.found_address,
+      found_lost_name: e.detail.value.found_lost_name == null ? '未填写' : e.detail.value.found_lost_name,
+      found_tag: e.detail.value.found_tag == '' ? '未填写' : e.detail.value.found_tag,
+      found_det_address: e.detail.value.found_det_address == '' ? '未填写' : e.detail.value.found_det_address,
+      id_address: e.detail.value.id_address == '' ? '未填写' : e.detail.value.id_address,
+      found_details: e.detail.value.found_details == '' ? '未填写' : e.detail.value.found_details,
+      found_name: e.detail.value.found_name == '' ? '未填写' : e.detail.value.found_name,
+      found_tel: e.detail.value.found_tel,
+      found_wx: e.detail.value.found_wx == '' ? '未填写' : e.detail.value.found_wx,
+      found_QQ: e.detail.value.found_QQ == '' ? '未填写' : e.detail.value.found_QQ,
+      def1: e.detail.value.def1,
+    })
+    wx.request({
+      url: 'http://172.20.10.3/laf/push.do',
+      data: {
+        image: '../../images/lost.jpg',
+        found_title: this.data.found_title,
+        found_category: this.data.pickValue,
+        found_state: this.data.found_state,
+        found_date: this.data.found_date,
+        found_address: this.data.found_address,
+        found_id: this.data.found_id,
+        found_lost_name: this.data.found_lost_name,
+        found_tag: this.data.found_tag,
+        found_det_address: this.data.found_det_address,
+        id_address: this.data.id_address,
+        found_details: this.data.note,
+        found_name: this.data.found_name,
+        found_tel: this.data.found_tel,
+        found_wx: this.data.found_wx,
+        found_QQ: this.data.found_QQ,
+        //目前获取不到openid，暂时就是用123代替下
+        def1: '123'
+
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function(res) {
+        console.log(res)
+      }
+    })
+  },
+  bindDateChange: function(e) {
+    this.setData({
+      found_date: e.detail.value
+    })
+  },
+  // 删除图片
+  clearImg: function (e) {
+    var nowList = [];//新数据
+    var uploaderList = this.data.uploaderList;//原数据
+
+    for (let i = 0; i < uploaderList.length; i++) {
+      if (i == e.currentTarget.dataset.index) {
+        continue;
+      } else {
+        nowList.push(uploaderList[i])
+      }
+    }
+    this.setData({
+      uploaderNum: this.data.uploaderNum - 1,
+      uploaderList: nowList,
+      showUpload: true
+    })
+  },
+  //展示图片
+  showImg: function (e) {
+    var that = this;
+    wx.previewImage({
+      urls: that.data.uploaderList,
+      current: that.data.uploaderList[e.currentTarget.dataset.index]
+    })
+  },
+  //上传图片
+  upload: function (e) {
+    var that = this;
+    wx.chooseImage({
+      count: 9 - that.data.uploaderNum, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        console.log(res)
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        let tempFilePaths = res.tempFilePaths;
+        let uploaderList = that.data.uploaderList.concat(tempFilePaths);
+        if (uploaderList.length == 9) {
+          that.setData({
+            showUpload: false
+          })
+        }
+        that.setData({
+          uploaderList: uploaderList,
+          uploaderNum: uploaderList.length,
+        })
+      }
+    })
+  },
 })

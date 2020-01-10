@@ -1,13 +1,13 @@
 {
   "pages": [
-    "pages/push/push",
-    "pages/test1/test1",
-    "pages/search/search",
     "pages/homePage/homePage",
-    "pages/test/test",
-    "pages/mine-push/mine-push",
-    "pages/my/my",
     "pages/index/index",
+    "pages/test1/test1",
+    "pages/test/test",
+    "pages/push/push",
+    "pages/mine-push/mine-push",
+    "pages/search/search",
+    "pages/my/my",
     "pages/logs/logs",
     "pages/sendMsg/sendMsg",
     "pages/details/details"

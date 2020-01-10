@@ -4,74 +4,74 @@
   </view>
   <view class="middle">
     <form bindsubmit='subPush'>
-      <view class="">
-        <text>标题:</text>
-        <input name="found_title" type="text" />
+      <view class='ui_cell'>
+        <text class='ui_cell_bd ui_cell_bd_must'>标题:</text>
+        <input name="found_title" type="text" class='ui_cell_input' />
       </view>
       <view class="">
-        <text>物品分类:</text>
-        <!-- 下拉框 -->
-        <view class='top-selected' bindtap='bindShowMsg'>
-          <text name="found_category">{{grade_name}}</text>
-          <image src='../../images/down.jpg'></image>
-        </view>
-        <!-- 下拉需要显示的列表 -->
-        <view class="select_box" wx:if="{{select}}">
-          <view wx:for="{{grades}}" wx:key="unique">
-            <view class="select_one" bindtap="mySelect" data-name="{{item}}">{{item}}</view>
-          </view>
+        <view class='ui_cell'>
+          <view class='ui_cell_bd ui_cell_bd_must'>类别</view>
+          <picker class='ui_cell_picker' bindchange="picker" value="{{index}}" range="{{pickList}}">
+            <input class='ui_cell_input' disabled='true' placeholder='请选择' value="{{pickValue}}" name='found_category'></input>
+          </picker>
+          <view class='ui_cell_right'></view>
         </view>
       </view>
-      <view class="middle-detail" style="height: 400rpx;">
-        <text>详情:</text>
-        <textarea name="found_details" id="" cols="30" rows="20"></textarea>
-      </view>
       <view class="">
-        <text>标签:</text>
-        <input name="found_tag" type="text" />
+        <textarea maxlength='200' bindinput='note' placeholder='请输入详情，方便失主更清晰的了解你所拾得的物品'>
+          <text class='eColor'>{{length}}/200</text>
+        </textarea>
       </view>
-      <view class="">
-        <picker mode="date" value="{{found_date}}" start="2019-01-01" end="" bindchange="bindDateChange">
-          <text>拾获日期:</text>
-          <input name="found_date" type="text" value="{{found_date}}" disabled="true" placeholder="点击选择你需要的日期" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd">标签:</text>
+        <input name="found_tag" type="text" class='ui_cell_input' />
+      </view>
+      <view class="ui_cell">
+        <view class='ui_cell_bd ui_cell_bd_must'>拾获日期:</view>
+        <picker mode="date" value="{{found_date}}" start="2019-01-01" end="" bindchange="bindDateChange" class='ui_cell_picker'>
+          <input name="found_date" type="text" value="{{found_date}}" disabled="true" class='ui_cell_input' placeholder="请选择"/>
         </picker>
+        <view class='ui_cell_right'></view>
       </view>
-      <view class="">
-        <text>拾获地区:</text>
-        <input name="found_address" type="text" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">拾获地区:</text>
+        <input name="found_address" type="text" class='ui_cell_input' />
       </view>
-      <view class="">
-        <text>详细地址:</text>
-        <input name="found_det_address" type="text" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">详细地址:</text>
+        <input name="found_det_address" type="text" class='ui_cell_input' />
       </view>
-      <view class="">
-        <text>证件地址:</text>
-        <input name="id_address" type="text" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd">证件地址:</text>
+        <input name="id_address" type="text" class='ui_cell_input' placeholder="证件上的地址" />
       </view>
-      <view class="">
-        <text>证件后四位:</text>
-        <input name="found_id" type="text" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd">证件号码:</text>
+        <input name="found_id" type="text" class='ui_cell_input' placeholder="如果拾得身份证请填写后四位" />
       </view>
-      <view class="">
-        <text>失主姓名:</text>
-        <input name="" type="text" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd">失主姓名:</text>
+        <input name="found_lost_name" type="text" class='ui_cell_input' />
       </view>
-      <view class="">
-        <text>发布人姓名:</text>
-        <input name="found_name" type="text" />
+      <view class="person">发布人信息</view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">姓名:</text>
+        <input name="found_name" type="text" class='ui_cell_input' />
       </view>
-      <view class="">
-        <text>发布人联系方式:</text>
-        <input name="found_tel" type="text" />
+
+      <view class="ui_cell">
+        <text class='ui_cell_bd ui_cell_bd_must'>联系方式:</text>
+        <input name="found_tel" type="text" class='ui_cell_input' />
       </view>
-      <view class="">
-        <text>发布人QQ:</text>
-        <input name="found_QQ" type="text" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">QQ:</text>
+        <input name="found_QQ" type="text" class='ui_cell_input' />
       </view>
-      <view>
-        <text>发布人微信:</text>
-        <input name="found_wx" type="text" />
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">微信:</text>
+        <input name="found_wx" type="text" class='ui_cell_input' />
       </view>
+      <!-- <view class='ui_btn ui_btn_primary '>按钮</view> -->
       <button formType="submit" type='primary' class="middle-btn">立即发布</button>
     </form>
   </view>

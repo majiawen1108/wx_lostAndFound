@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    uploaderList: [],
+    uploaderNum: 0,
+    showUpload: true,
     image: '',
     found_title: '',
     found_category: '',
@@ -26,72 +28,88 @@ Page({
     found_QQ: '',
     def1: '',
     select: false,
-    grade_name: '--请选择你的类别--',
-    grades: [
+    pickList: [
       '卡类',
       '生活',
       '金钱',
       '小物件',
       '大物件',
-    ]
+    ],
+    pickValue: '',
+    length: 0,
+    note: '',
+    time: 60,
+    showCode: false
   },
-
+  // picker
+  picker: function (e) {
+    this.setData({
+      pickValue: this.data.pickList[e.detail.value]
+    })
+  },
+  //textarea
+  note: function (e) {
+    this.setData({
+      note: e.detail.value,
+      length: e.detail.value.length
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
-  subPush: function(e) {
+  subPush: function (e) {
     var that = this
     console.log(e.detail.value)
     that.setData({
@@ -114,11 +132,11 @@ Page({
       def1: e.detail.value.def1,
     })
     wx.request({
-      url: 'http://172.20.10.3/laf/push.do', 
+      url: 'http://172.20.10.3/laf/push.do',
       data: {
         image: '../../images/lost.jpg',
         found_title: this.data.found_title,
-        found_category: this.data.grade_name,
+        found_category: this.data.pickValue,
         found_state: this.data.found_state,
         found_date: this.data.found_date,
         found_address: this.data.found_address,
@@ -127,7 +145,7 @@ Page({
         found_tag: this.data.found_tag,
         found_det_address: this.data.found_det_address,
         id_address: this.data.id_address,
-        found_details: this.data.found_details,
+        found_details: this.data.note,
         found_name: this.data.found_name,
         found_tel: this.data.found_tel,
         found_wx: this.data.found_wx,
@@ -139,33 +157,64 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res)
       }
     })
   },
-  bindDateChange: function(e) {
+  bindDateChange: function (e) {
     this.setData({
       found_date: e.detail.value
     })
   },
-  /**
-   *  点击下拉框
-   */
-  bindShowMsg() {
+  // 删除图片
+  clearImg: function (e) {
+    var nowList = [];//新数据
+    var uploaderList = this.data.uploaderList;//原数据
+
+    for (let i = 0; i < uploaderList.length; i++) {
+      if (i == e.currentTarget.dataset.index) {
+        continue;
+      } else {
+        nowList.push(uploaderList[i])
+      }
+    }
     this.setData({
-      select: !this.data.select
+      uploaderNum: this.data.uploaderNum - 1,
+      uploaderList: nowList,
+      showUpload: true
     })
   },
-  /**
-   * 已选下拉框
-   */
-  mySelect(e) {
-    console.log(e)
-    var name = e.currentTarget.dataset.name
-    this.setData({
-      grade_name: name,
-      select: false
+  //展示图片
+  showImg: function (e) {
+    var that = this;
+    wx.previewImage({
+      urls: that.data.uploaderList,
+      current: that.data.uploaderList[e.currentTarget.dataset.index]
     })
-  }
+  },
+  //上传图片
+  upload: function (e) {
+    var that = this;
+    wx.chooseImage({
+      count: 9 - that.data.uploaderNum, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        console.log(res)
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        let tempFilePaths = res.tempFilePaths;
+        let uploaderList = that.data.uploaderList.concat(tempFilePaths);
+        if (uploaderList.length == 9) {
+          that.setData({
+            showUpload: false
+          })
+        }
+        that.setData({
+          uploaderList: uploaderList,
+          uploaderNum: uploaderList.length,
+        })
+      }
+    })
+  },
 })

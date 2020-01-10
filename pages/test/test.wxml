@@ -1,63 +1,93 @@
-<view class="page">
-  <!-- 侧边栏内容 -->
-  <view class="page-slidebar">
-    <view class="page-content">
-      <view class="wc">
-        <text>选择</text>
-      </view>
-      <view class="wc" bindtap="push">
-        <text>push</text>
-      </view>
-      <view class="wc" bindtap="search">
-        <text>search</text>
-      </view>
-    </view>
+<view class="all">
+  <view class="top">
+    感谢您的拾金不昧❤
   </view>
-
-  <!-- 主页内容 -->
-
-  <!-- （open ? 'c-state' : ''）三元运算符： -->
-  <!-- 1.默认情况下 open 为 false -->
-  <!-- 2.当点击左上角图标的时候或者屏幕向左滑动，open 变化 true -->
-  <!-- 3.当 open 为 true 时，会加上类名为 c-state 和 cover 的 css 样式 -->
-
-  <!-- bindtouchstart、 bindtouchmove、bindtouchend -->
-  <!-- 当手指触摸屏幕并滑动时，所触发的三个函数 -->
-  <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{open ? ['c-state','cover'] : ''}} ">
-    <view wx:if="{{what=='push'}}">
-      <!-- 轮播图的自定义组件 -->
-      <lunbo></lunbo>
-      <!-- 搜索栏 -->
-      <searchBar></searchBar>
-      <!-- <meau></meau> -->
-      <view class="nav_wrap">
-        <!-- 自己滚动区域的组件 -->
-        <!-- scroll-x就是水平可以滑动 -->
-        <scroll-view class="nav" scroll-x>
-          <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="{{index}}">
-            {{item.text}}
-          </view>
-        </scroll-view>
+  <view class="middle">
+    <form bindsubmit='subPush'>
+      <view class='ui_cell'>
+        <text class='ui_cell_bd ui_cell_bd_must'>标题:</text>
+        <input name="found_title" type="text" class='ui_cell_input' />
       </view>
-      <view class="container">
-        <view class="page-info" wx:for="{{list}}" wx:key="{{index}}" bindtap="toOrder" data-num="{{index}}">
-          <!-- <navigator url="../details/details"> -->
-          <view class="page-info-img">
-            <image mode:widthFix class="image" src="{{item.image}}"></image>
-          </view>
-          <!-- </navigator> -->
-          <view class="page-info-msg">
-            <view class="title">{{item.found_title}}</view>
-            <view>
-              <view class="title2">{{item.found_category}}</view>
-              <view class="title1">{{item.found_state}}</view>
-              <view class="title1">{{item.found_date}}</view>
-              <view class="title1">{{item.found_address}}</view>
-            </view>
-          </view>
+      <view class="">
+        <view class='ui_cell'>
+          <view class='ui_cell_bd ui_cell_bd_must'>类别</view>
+          <picker class='ui_cell_picker' bindchange="picker" value="{{index}}" range="{{pickList}}">
+            <input class='ui_cell_input' disabled='true' placeholder='请选择' value="{{pickValue}}" name='found_category'></input>
+          </picker>
+          <view class='ui_cell_right'></view>
         </view>
       </view>
-    </view>
-    <view wx:if="{{what=='search'}}">345</view>
+      <view class="">
+        <textarea maxlength='200' bindinput='note' placeholder='请输入详情，方便失主更清晰的了解你所拾得的物品'>
+          <text class='eColor'>{{length}}/200</text>
+        </textarea>
+      </view>
+      <view class='ui_cell'>
+        <view class='ui_cell_bd'>图片上传</view>
+        <view class='ui_cell_ft'>{{uploaderNum}}/9</view>
+      </view>
+      <view class='ui_uploader_cell'>
+        <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+          <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="20" color="red" />
+          <image bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+        </view>
+        <view class='ui_uploader' bindtap='upload' wx:if="{{showUpload}}"></view>
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd">标签:</text>
+        <input name="found_tag" type="text" class='ui_cell_input' />
+      </view>
+      <view class="ui_cell">
+        <view class='ui_cell_bd ui_cell_bd_must'>拾获日期:</view>
+        <picker mode="date" value="{{found_date}}" start="2019-01-01" end="" bindchange="bindDateChange" class='ui_cell_picker'>
+          <input name="found_date" type="text" value="{{found_date}}" disabled="true" class='ui_cell_input' placeholder="请选择" />
+        </picker>
+        <view class='ui_cell_right'></view>
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">拾获地区:</text>
+        <input name="found_address" type="text" class='ui_cell_input' />
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">详细地址:</text>
+        <input name="found_det_address" type="text" class='ui_cell_input' />
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd">证件地址:</text>
+        <input name="id_address" type="text" class='ui_cell_input' placeholder="证件上的地址" />
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd">证件号码:</text>
+        <input name="found_id" type="text" class='ui_cell_input' placeholder="如果拾得身份证请填写后四位" />
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd">失主姓名:</text>
+        <input name="found_lost_name" type="text" class='ui_cell_input' />
+      </view>
+      <view class="person">发布人信息</view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">姓名:</text>
+        <input name="found_name" type="text" class='ui_cell_input' />
+      </view>
+
+      <view class="ui_cell">
+        <text class='ui_cell_bd ui_cell_bd_must'>联系方式:</text>
+        <input name="found_tel" type="text" class='ui_cell_input' />
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">QQ:</text>
+        <input name="found_QQ" type="text" class='ui_cell_input' />
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">微信:</text>
+        <input name="found_wx" type="text" class='ui_cell_input' />
+      </view>
+      <button formType="submit" type='primary' class="middle-btn">立即发布</button>
+    </form>
+  </view>
+  <view class="footer">
+
+    注意：有可能会有冒领者打电话联系您，谎称他（她）是物品的主人， 而且他所描述的物品丢失时间、地点 与你拾获物品的时间地点非常吻合，也能描述该物品的基本信息， 例如颜色，包裹内含有物品等，向您认领物品， 但有可能他只是个冒领者，从本站看到你发布的信息而已， 一定要在归还物品的时候对认领者做好真实性的验证。
+
   </view>
 </view>
