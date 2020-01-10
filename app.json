@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/search/search",
+    "pages/push/push",
+    "pages/test1/test1",
     "pages/homePage/homePage",
     "pages/index/index",
-    "pages/test1/test1",
     "pages/test/test",
-    "pages/push/push",
     "pages/mine-push/mine-push",
-    "pages/search/search",
     "pages/my/my",
     "pages/logs/logs",
     "pages/sendMsg/sendMsg",
@@ -25,8 +25,7 @@
     "selectedColor": "#000000",
     "borderStyle": "white",
     "backgroundColor": "#f8f9fb",
-    "list": [
-      {
+    "list": [{
         "text": "失物招领",
         "pagePath": "pages/homePage/homePage",
         "iconPath": "images/home.png",

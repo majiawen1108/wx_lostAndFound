@@ -1,38 +1,8 @@
-<!-- 轮播图的自定义组件 -->
-<lunbo></lunbo>
-<view class='ui_tab'>
-  <view class='ui_navbar'>
-    <view class='ui_navbar_item {{barIndex==index?"ui_navbar_item_on":""}}' wx:for="{{barList}}" wx:key="{{index}}" data-index="{{index}}" bindtap='clickBar'>{{item}}</view>
-  </view>
-  <view wx:if="{{barIndex==0}}">
-    <!-- 搜索栏 -->
-    <searchBar></searchBar>
-    <!-- <meau></meau> -->
-    <view class="nav_wrap">
-      <!-- 自己滚动区域的组件 -->
-      <!-- scroll-x就是水平可以滑动 -->
-      <scroll-view class="nav" scroll-x>
-        <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="{{index}}">
-          {{item.text}}
-        </view>
-      </scroll-view>
-    </view>
-    <view class="container">
-      <view class="page-info" wx:for="{{list}}" wx:key="{{index}}" bindtap="toOrder" data-num="{{index}}">
-        <view class="page-info-img">
-          <image mode:widthFix class="image" src="{{item.image}}"></image>
-        </view>
-        <view class="page-info-msg">
-          <view class="title">{{item.found_title}}</view>
-          <view>
-            <view class="title2">{{item.found_category}}</view>
-            <view class="title3 {{item.found_state==='未认领'?'active':''}}">{{item.found_state}}</view>
-            <view class="title1">{{item.found_date}}</view>
-            <view class="title1">{{item.found_address}}</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view wx:if="{{barIndex==1}}">这个是失主</view>
+<view class='ui_cell'>
+  <view class='ui_cell_bd ui_cell_bd_must'>选择地址</view>
+  <picker mode="region" bindchange="bindRegionChange" value="{{detailed}}" custom-item="{{customItem}}"
+name="detailed" class='ui_cell_picker' >
+    <view class="picker {{clas}}" >{{detailed}}</view>
+  </picker>
+  <view class='ui_cell_right'></view>
 </view>

@@ -1,5 +1,6 @@
 // pages/push/push.js
 //获取应用实例
+var calls = require("../../utils/city.js")
 const app = getApp()
 Page({
 
@@ -7,9 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //图片
     uploaderList: [],
     uploaderNum: 0,
     showUpload: true,
+    //初始数据
     image: '',
     found_title: '',
     found_category: '',
@@ -27,7 +30,7 @@ Page({
     found_wx: '',
     found_QQ: '',
     def1: '',
-    select: false,
+    //类别
     pickList: [
       '卡类',
       '生活',
@@ -36,10 +39,13 @@ Page({
       '大物件',
     ],
     pickValue: '',
+    //详情中字数
     length: 0,
+    //详情中的内容
     note: '',
-    time: 60,
-    showCode: false
+    //省市联动
+    customItem: [],
+    detailed: '',
   },
   // picker
   picker: function (e) {
@@ -53,6 +59,27 @@ Page({
       note: e.detail.value,
       length: e.detail.value.length
     })
+  },
+   //省市联动
+   bindRegionChange: function (e) {
+    var that = this
+    //为了让选择框有个默认值，    
+    that.setData({
+      clas: ''
+    })　　　//下拉框所选择的值
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+
+    this.setData({
+      //拼的字符串传后台
+      detailed: e.detail.value[0] + " " + e.detail.value[1] + " " + e.detail.value[2],
+      //下拉框选中的值
+      region: e.detail.value
+    })
+
+    this.setData({
+      "AddSite.area": e.detail.value[0] + " " + e.detail.value[1] + " " + e.detail.value[2]
+    })
+    console.log(this.data.AddSite)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -109,6 +136,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //提交按钮函数
   subPush: function (e) {
     var that = this
     console.log(e.detail.value)
@@ -152,7 +180,6 @@ Page({
         found_QQ: this.data.found_QQ,
         //目前获取不到openid，暂时就是用123代替下
         def1: '123'
-
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -162,6 +189,7 @@ Page({
       }
     })
   },
+  //日期显示
   bindDateChange: function (e) {
     this.setData({
       found_date: e.detail.value

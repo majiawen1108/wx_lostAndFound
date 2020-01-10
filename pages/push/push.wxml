@@ -12,7 +12,8 @@
         <view class='ui_cell'>
           <view class='ui_cell_bd ui_cell_bd_must'>类别</view>
           <picker class='ui_cell_picker' bindchange="picker" value="{{index}}" range="{{pickList}}">
-            <input class='ui_cell_input' disabled='true' placeholder='请选择' value="{{pickValue}}" name='found_category'></input>
+            <input class='ui_cell_input' disabled='true' placeholder='请选择' value="{{pickValue}}"
+              name='found_category'></input>
           </picker>
           <view class='ui_cell_right'></view>
         </view>
@@ -28,14 +29,21 @@
       </view>
       <view class="ui_cell">
         <view class='ui_cell_bd ui_cell_bd_must'>拾获日期:</view>
-        <picker mode="date" value="{{found_date}}" start="2019-01-01" end="" bindchange="bindDateChange" class='ui_cell_picker'>
-          <input name="found_date" type="text" value="{{found_date}}" disabled="true" class='ui_cell_input' placeholder="请选择"/>
+        <picker mode="date" value="{{found_date}}" start="2019-01-01" end="" bindchange="bindDateChange"
+          class='ui_cell_picker'>
+          <input name="found_date" type="text" value="{{found_date}}" disabled="true" class='ui_cell_input'
+            placeholder="请选择" />
         </picker>
         <view class='ui_cell_right'></view>
       </view>
-      <view class="ui_cell">
-        <text class="ui_cell_bd ui_cell_bd_must">拾获地区:</text>
-        <input name="found_address" type="text" class='ui_cell_input' />
+      <view class='ui_cell'>
+        <view class='ui_cell_bd ui_cell_bd_must'>拾获地址</view>
+        <picker mode="region" bindchange="bindRegionChange" value="{{detailed}}" custom-item="{{customItem}}"
+          name="detailed" class='ui_cell_picker'>
+          <input name="found_address" type="text" value="{{detailed}}" disabled="true" class='ui_cell_input'
+          placeholder="请选择" />
+        </picker>
+        <view class='ui_cell_right'></view>
       </view>
       <view class="ui_cell">
         <text class="ui_cell_bd ui_cell_bd_must">详细地址:</text>
@@ -77,7 +85,8 @@
   </view>
   <view class="footer">
 
-    注意：有可能会有冒领者打电话联系您，谎称他（她）是物品的主人， 而且他所描述的物品丢失时间、地点 与你拾获物品的时间地点非常吻合，也能描述该物品的基本信息， 例如颜色，包裹内含有物品等，向您认领物品， 但有可能他只是个冒领者，从本站看到你发布的信息而已， 一定要在归还物品的时候对认领者做好真实性的验证。
+    注意：有可能会有冒领者打电话联系您，谎称他（她）是物品的主人， 而且他所描述的物品丢失时间、地点 与你拾获物品的时间地点非常吻合，也能描述该物品的基本信息， 例如颜色，包裹内含有物品等，向您认领物品，
+    但有可能他只是个冒领者，从本站看到你发布的信息而已， 一定要在归还物品的时候对认领者做好真实性的验证。
 
   </view>
 </view>

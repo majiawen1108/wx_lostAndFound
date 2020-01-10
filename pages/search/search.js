@@ -7,7 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    //图片
+    uploaderList: [],
+    uploaderNum: 0,
+    showUpload: true,
+    //初始数据
     image: '',
     found_title: '',
     found_category: '',
@@ -25,17 +29,65 @@ Page({
     found_wx: '',
     found_QQ: '',
     def1: '',
-    select: false,
-    grade_name: '--请选择你的类别--',
-    grades: [
+    //类别
+    pickList: [
       '卡类',
       '生活',
       '金钱',
       '小物件',
       '大物件',
-    ]
+    ],
+    pickValue: '',
+    //详情中字数
+    length: 0,
+    //详情中的内容
+    note: '',
+    switch: false,
+    //省市联动
+    customItem: [],
+    detailed: '',
   },
+  // picker
+  picker: function (e) {
+    this.setData({
+      pickValue: this.data.pickList[e.detail.value]
+    })
+  },
+  //textarea
+  note: function (e) {
+    this.setData({
+      note: e.detail.value,
+      length: e.detail.value.length
+    })
+  },
+  // switch
+  switchChange: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      switch: !this.data.switch
+    })
+  },
+  //省市联动
+  bindRegionChange: function (e) {
+    var that = this
+    //为了让选择框有个默认值，    
+    that.setData({
+      clas: ''
+    })　　　//下拉框所选择的值
+    console.log('picker发送选择改变，携带值为', e.detail.value)
 
+    this.setData({
+      //拼的字符串传后台
+      detailed: e.detail.value[0] + " " + e.detail.value[1] + " " + e.detail.value[2],
+      //下拉框选中的值
+      region: e.detail.value
+    })
+
+    this.setData({
+      "AddSite.area": e.detail.value[0] + " " + e.detail.value[1] + " " + e.detail.value[2]
+    })
+    console.log(this.data.AddSite)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -114,11 +166,11 @@ Page({
       def1: e.detail.value.def1,
     })
     wx.request({
-      url: 'http://172.20.10.3/laf/push.do', //改成自己的服务器地址
+      url: 'http://172.20.10.3/laf/push.do',
       data: {
         image: '../../images/lost.jpg',
         found_title: this.data.found_title,
-        found_category: this.data.grade_name,
+        found_category: this.data.pickValue,
         found_state: this.data.found_state,
         found_date: this.data.found_date,
         found_address: this.data.found_address,
@@ -127,11 +179,12 @@ Page({
         found_tag: this.data.found_tag,
         found_det_address: this.data.found_det_address,
         id_address: this.data.id_address,
-        found_details: this.data.found_details,
+        found_details: this.data.note,
         found_name: this.data.found_name,
         found_tel: this.data.found_tel,
         found_wx: this.data.found_wx,
         found_QQ: this.data.found_QQ,
+        //目前获取不到openid，暂时就是用123代替下
         def1: '123'
 
       },
@@ -148,23 +201,54 @@ Page({
       found_date: e.detail.value
     })
   },
-  /**
-   *  点击下拉框
-   */
-  bindShowMsg() {
+  // 删除图片
+  clearImg: function (e) {
+    var nowList = []; //新数据
+    var uploaderList = this.data.uploaderList; //原数据
+
+    for (let i = 0; i < uploaderList.length; i++) {
+      if (i == e.currentTarget.dataset.index) {
+        continue;
+      } else {
+        nowList.push(uploaderList[i])
+      }
+    }
     this.setData({
-      select: !this.data.select
+      uploaderNum: this.data.uploaderNum - 1,
+      uploaderList: nowList,
+      showUpload: true
     })
   },
-  /**
-   * 已选下拉框
-   */
-  mySelect(e) {
-    console.log(e)
-    var name = e.currentTarget.dataset.name
-    this.setData({
-      grade_name: name,
-      select: false
+  //展示图片
+  showImg: function (e) {
+    var that = this;
+    wx.previewImage({
+      urls: that.data.uploaderList,
+      current: that.data.uploaderList[e.currentTarget.dataset.index]
     })
-  }
+  },
+  //上传图片
+  upload: function (e) {
+    var that = this;
+    wx.chooseImage({
+      count: 9 - that.data.uploaderNum, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        console.log(res)
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        let tempFilePaths = res.tempFilePaths;
+        let uploaderList = that.data.uploaderList.concat(tempFilePaths);
+        if (uploaderList.length == 9) {
+          that.setData({
+            showUpload: false
+          })
+        }
+        that.setData({
+          uploaderList: uploaderList,
+          uploaderNum: uploaderList.length,
+        })
+      }
+    })
+  },
 })
