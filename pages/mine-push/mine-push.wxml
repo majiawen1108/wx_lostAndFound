@@ -1,8 +1,10 @@
 <view class="container">
   <view class="product-list">
-    <view class="product-item" wx:for="{{list}}" wx:key="{{index}}" bindtap="toOrder" data-num="{{index}}">
+    <view class="product-item" wx:for="{{list}}" wx:key="index" bindtap="toOrder" data-num="{{index}}">
       <movable-area>
-        <movable-view out-of-bounds="true" direction="horizontal" x="{{item.xmove}}" inertia="true" data-productIndex="{{index}}" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindchange="handleMovableChange">
+        <movable-view out-of-bounds="true" direction="horizontal" x="{{item.xmove}}" inertia="true"
+          data-productIndex="{{index}}" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd"
+          bindchange="handleMovableChange">
           <view class="page-info-img">
             <image mode:widthFix class="image" src="{{item.image}}"></image>
           </view>
@@ -12,7 +14,8 @@
               <view class="title2">{{item.found_category}}</view>
               <view class="title3 {{item.found_state==='未认领'?'active':''}}">{{item.found_state}}</view>
               <view class="title1">{{item.found_date}}</view>
-              <view class="title1">{{item.found_address}}</view>
+              <wxs src="../../utils/subutils.wxs" module="tools" />
+              <view class="title1">{{tools.sub(item.found_address,0,3)}}</view>
             </view>
           </view>
         </movable-view>

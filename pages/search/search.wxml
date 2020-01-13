@@ -6,20 +6,20 @@
     <form bindsubmit='subPush'>
       <view class='ui_cell'>
         <text class='ui_cell_bd ui_cell_bd_must'>标题:</text>
-        <input name="found_title" type="text" class='ui_cell_input' />
+        <input name="search_title" type="text" class='ui_cell_input' />
       </view>
       <view class="">
         <view class='ui_cell'>
           <view class='ui_cell_bd ui_cell_bd_must'>类别</view>
           <picker class='ui_cell_picker' bindchange="picker" value="{{index}}" range="{{pickList}}">
             <input class='ui_cell_input' disabled='true' placeholder='请选择' value="{{pickValue}}"
-              name='found_category'></input>
+              name='search_category'></input>
           </picker>
           <view class='ui_cell_right'></view>
         </view>
       </view>
       <view class="">
-        <textarea maxlength='200' bindinput='note' placeholder='请输入详情，方便拾得您物品的人更清晰的了解你所丢失的物品'>
+        <textarea maxlength='200' bindinput='note' placeholder='请输入详情，方便拾得您物品的人更清晰的了解你所丢失的物品' name="search_details">
           <text class='eColor'>{{length}}/200</text>
         </textarea>
       </view>
@@ -29,48 +29,48 @@
       </view>
       <view class="ui_cell" wx:if="{{switch}}">
         <text class="ui_cell_bd ui_cell_bd_must">有偿金额:</text>
-        <input name="found_tag" type="text" class='ui_cell_input' />
+        <input name="money" type="text" class='ui_cell_input' />
       </view>
       <view class="ui_cell">
         <view class='ui_cell_bd ui_cell_bd_must'>丢失日期:</view>
-        <picker mode="date" value="{{found_date}}" start="2019-01-01" end="" bindchange="bindDateChange"
+        <picker mode="date" value="{{search_date}}" start="2019-01-01" end="" bindchange="bindDateChange"
           class='ui_cell_picker'>
-          <input name="found_date" type="text" value="{{found_date}}" disabled="true" class='ui_cell_input'
+          <input name="search_date" type="text" value="{{search_date}}" disabled="true" class='ui_cell_input'
             placeholder="请选择" />
         </picker>
         <view class='ui_cell_right'></view>
       </view>
       <view class='ui_cell'>
-        <view class='ui_cell_bd ui_cell_bd_must'>拾获地址</view>
+        <view class='ui_cell_bd ui_cell_bd_must'>丢失地址</view>
         <picker mode="region" bindchange="bindRegionChange" value="{{detailed}}" custom-item="{{customItem}}"
           name="detailed" class='ui_cell_picker'>
-          <input name="found_address" type="text" value="{{detailed}}" disabled="true" class='ui_cell_input'
+          <input name="search_address" type="text" value="{{detailed}}" disabled="true" class='ui_cell_input'
             placeholder="请选择" />
         </picker>
         <view class='ui_cell_right'></view>
       </view>
       <view class="ui_cell">
         <text class="ui_cell_bd ui_cell_bd_must">详细地址:</text>
-        <input name="found_det_address" type="text" class='ui_cell_input' />
+        <input name="search_det_address" type="text" class='ui_cell_input' />
       </view>
 
       <view class="person">发布人信息</view>
       <view class="ui_cell">
         <text class="ui_cell_bd ui_cell_bd_must">姓名:</text>
-        <input name="found_name" type="text" class='ui_cell_input' />
+        <input name="search_name" type="text" class='ui_cell_input' />
       </view>
 
       <view class="ui_cell">
         <text class='ui_cell_bd ui_cell_bd_must'>联系方式:</text>
-        <input name="found_tel" type="text" class='ui_cell_input' />
+        <input name="search_tel" type="text" class='ui_cell_input' />
       </view>
       <view class="ui_cell">
         <text class="ui_cell_bd ui_cell_bd_must">QQ:</text>
-        <input name="found_QQ" type="text" class='ui_cell_input' />
+        <input name="search_QQ" type="text" class='ui_cell_input' />
       </view>
       <view class="ui_cell">
         <text class="ui_cell_bd ui_cell_bd_must">微信:</text>
-        <input name="found_wx" type="text" class='ui_cell_input' />
+        <input name="search_wx" type="text" class='ui_cell_input' />
       </view>
       <!-- <view class='ui_btn ui_btn_primary '>按钮</view> -->
       <button formType="submit" type='primary' class="middle-btn">立即发布</button>

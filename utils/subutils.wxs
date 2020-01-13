@@ -1,0 +1,17 @@
+/**
+ * 在wxml中截取字符串
+ * @param val 
+ * @param start 
+ * @param end 
+ */
+var sub = function (val, start=0, end=17) {
+  if (val.length == 0 || val == undefined) {
+    return;
+  }
+  if (val.length > end) {
+    return val.substring(start, end) + "...";
+  } else {
+    return val;
+  }
+}
+module.exports.sub = sub;

@@ -1,6 +1,6 @@
 //获取应用实例
 const app = getApp()
-
+const URL = require('../../utils/url.js');
 Page({
   data: {
     id: '',
@@ -22,7 +22,7 @@ Page({
     var that = this
     console.log("删除选中的" + this.data.id)
     wx.request({
-      url: 'http://172.20.10.3/laf/delete.do',
+      url: URL.Delete,
       data: {
         def1: '123',
         id: this.data.id
@@ -135,7 +135,7 @@ Page({
           sexx = '女'
         }
         wx.request({
-          url: 'http://172.20.10.3/laf/minepush.do',
+          url: URL.MinePush,
           data: {
             def1: '123',
             nickName: res.userInfo.nickName,

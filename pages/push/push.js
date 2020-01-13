@@ -2,6 +2,7 @@
 //获取应用实例
 var calls = require("../../utils/city.js")
 const app = getApp()
+const URL = require('../../utils/url.js');
 Page({
 
   /**
@@ -60,13 +61,13 @@ Page({
       length: e.detail.value.length
     })
   },
-   //省市联动
-   bindRegionChange: function (e) {
+  //省市联动
+  bindRegionChange: function (e) {
     var that = this
     //为了让选择框有个默认值，    
     that.setData({
       clas: ''
-    })　　　//下拉框所选择的值
+    }) //下拉框所选择的值
     console.log('picker发送选择改变，携带值为', e.detail.value)
 
     this.setData({
@@ -160,7 +161,7 @@ Page({
       def1: e.detail.value.def1,
     })
     wx.request({
-      url: 'http://172.20.10.3/laf/push.do',
+      url: URL.Push,
       data: {
         image: '../../images/lost.jpg',
         found_title: this.data.found_title,
@@ -186,6 +187,17 @@ Page({
       },
       success: function (res) {
         console.log(res)
+        wx.showToast({
+          title: '发布成功！', // 标题
+          icon: 'success', // 图标类型，默认success
+          duration: 1500 // 提示窗停留时间，默认1500ms
+        })
+        setTimeout(function () {
+          wx.reLaunch({
+            url: '../homePage/homePage',
+          })
+        }, 1500)
+
       }
     })
   },
@@ -197,8 +209,8 @@ Page({
   },
   // 删除图片
   clearImg: function (e) {
-    var nowList = [];//新数据
-    var uploaderList = this.data.uploaderList;//原数据
+    var nowList = []; //新数据
+    var uploaderList = this.data.uploaderList; //原数据
 
     for (let i = 0; i < uploaderList.length; i++) {
       if (i == e.currentTarget.dataset.index) {

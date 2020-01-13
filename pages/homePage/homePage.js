@@ -1,4 +1,5 @@
 // pages/homePage/homePage.js
+const URL = require('../../utils/url.js');
 Page({
 
   /**
@@ -17,6 +18,7 @@ Page({
     country: '',
 
     list: [],
+    searchList:[],
     // 设置一个被点击的时候导航栏菜单的索引
     currentIndexNav: 0,
     // 首页导航数据
@@ -60,7 +62,7 @@ Page({
     var found_category = this.data.navList[i].text
     console.log("found_tag" + found_category)
     wx.request({
-      url: 'http://172.20.10.3/laf/indexbytag.do',
+      url: URL.indexByTag,
       data: {
         found_category: found_category
       },
@@ -84,7 +86,10 @@ Page({
     })
   },
 
-  toOrder: function(e) {
+  toOrder: function (e) {
+   wx.showLoading({
+     title: '加载中...',
+   })
     this.setData({
       num: e.currentTarget.dataset.num
     })
@@ -93,14 +98,16 @@ Page({
     var queryone = this.data.list[i].id
     console.log("###id##" + queryone)
     wx.navigateTo({
+      
       url: '../details/details?id=' + queryone,
     })
+    wx.hideLoading();
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this;
 
     //获取用户的登录信息
@@ -117,7 +124,7 @@ Page({
           sexx = '女'
         }
         wx.request({
-          url: 'http://172.20.10.3/laf/index.do',
+          url: URL.indexQuery,
           data: {
             def1: '123',
             nickName: res.userInfo.nickName,
@@ -130,7 +137,7 @@ Page({
           // header: {
           //   'content-type': 'application/x-www-form-urlencoded'
           // },
-          success: function(res) {
+          success: function (res) {
             res = res.data
             console.log(res)
 
@@ -139,7 +146,7 @@ Page({
             })
 
           },
-          fail: function(res) {
+          fail: function (res) {
             console.log("获取数据失败，请检查服务器连接是否正常！");
           }
         })
@@ -157,49 +164,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

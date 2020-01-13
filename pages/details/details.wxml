@@ -1,4 +1,4 @@
-<view class="all" wx:for="{{list}}" wx:key="{{index}}">
+<view class="all" wx:for="{{list}}" wx:key="index">
   <view class="details-up">
     <image mode:widthFix src="{{item.image}}"></image>
   </view>

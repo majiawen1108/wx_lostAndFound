@@ -1,6 +1,7 @@
 // pages/push/push.js
 //获取应用实例
 const app = getApp()
+const URL = require("../../utils/url.js")
 Page({
 
   /**
@@ -13,21 +14,19 @@ Page({
     showUpload: true,
     //初始数据
     image: '',
-    found_title: '',
-    found_category: '',
-    found_state: '未认领',
-    found_date: '',
-    found_address: '未填写',
-    found_id: '',
-    found_lost_name: '未填写',
-    found_tag: '无',
-    found_det_address: '未填写',
-    id_address: '未填写',
-    found_details: '未填写',
-    found_name: '未填写',
-    found_tel: '',
-    found_wx: '',
-    found_QQ: '',
+    search_title: '',
+    search_category: '',
+    search_state: '未找到',
+    search_date: '',
+    search_address: '未填写',
+    paid: '',
+    money: '',
+    search_det_address: '未填写',
+    search_details: '未填写',
+    search_name: '未填写',
+    search_tel: '',
+    search_wx: '',
+    search_QQ: '',
     def1: '',
     //类别
     pickList: [
@@ -73,7 +72,7 @@ Page({
     //为了让选择框有个默认值，    
     that.setData({
       clas: ''
-    })　　　//下拉框所选择的值
+    }) //下拉框所选择的值
     console.log('picker发送选择改变，携带值为', e.detail.value)
 
     this.setData({
@@ -147,43 +146,38 @@ Page({
     var that = this
     console.log(e.detail.value)
     that.setData({
-      found_title: e.detail.value.found_title,
+      search_title: e.detail.value.search_title,
       image: e.detail.value.image,
-      found_category: e.detail.value.found_category,
-      found_state: e.detail.value.found_state == null ? '未认领' : e.detail.value.found_state,
-      found_date: e.detail.value.found_date,
-      found_address: e.detail.value.found_address == '' ? '未填写' : e.detail.value.found_address,
-      found_id: e.detail.value.found_id == '' ? '未填写' : e.detail.value.found_address,
-      found_lost_name: e.detail.value.found_lost_name == null ? '未填写' : e.detail.value.found_lost_name,
-      found_tag: e.detail.value.found_tag == '' ? '未填写' : e.detail.value.found_tag,
-      found_det_address: e.detail.value.found_det_address == '' ? '未填写' : e.detail.value.found_det_address,
-      id_address: e.detail.value.id_address == '' ? '未填写' : e.detail.value.id_address,
-      found_details: e.detail.value.found_details == '' ? '未填写' : e.detail.value.found_details,
-      found_name: e.detail.value.found_name == '' ? '未填写' : e.detail.value.found_name,
-      found_tel: e.detail.value.found_tel,
-      found_wx: e.detail.value.found_wx == '' ? '未填写' : e.detail.value.found_wx,
-      found_QQ: e.detail.value.found_QQ == '' ? '未填写' : e.detail.value.found_QQ,
-      def1: e.detail.value.def1,
+      search_category: e.detail.value.search_category,
+      search_state: e.detail.value.search_state == null ? '未找到' : e.detail.value.search_state,
+      search_date: e.detail.value.search_date,
+      search_address: e.detail.value.search_address == '' ? '未填写' : e.detail.value.search_address,
+      search_det_address: e.detail.value.search_det_address == '' ? '未填写' : e.detail.value.search_det_address,
+      money: e.detail.value.money == null ? '0' : e.detail.value.money,
+      search_details: e.detail.value.search_details == '' ? '未填写' : e.detail.value.search_details,
+      search_name: e.detail.value.search_name == '' ? '未填写' : e.detail.value.search_name,
+      search_tel: e.detail.value.search_tel,
+      search_wx: e.detail.value.search_wx == '' ? '未填写' : e.detail.value.search_wx,
+      search_QQ: e.detail.value.search_QQ == '' ? '未填写' : e.detail.value.search_QQ,
+
     })
     wx.request({
-      url: 'http://172.20.10.3/laf/push.do',
+      url: URL.Search,
       data: {
         image: '../../images/lost.jpg',
-        found_title: this.data.found_title,
-        found_category: this.data.pickValue,
-        found_state: this.data.found_state,
-        found_date: this.data.found_date,
-        found_address: this.data.found_address,
-        found_id: this.data.found_id,
-        found_lost_name: this.data.found_lost_name,
-        found_tag: this.data.found_tag,
-        found_det_address: this.data.found_det_address,
-        id_address: this.data.id_address,
-        found_details: this.data.note,
-        found_name: this.data.found_name,
-        found_tel: this.data.found_tel,
-        found_wx: this.data.found_wx,
-        found_QQ: this.data.found_QQ,
+        search_title: this.data.search_title,
+        search_category: this.data.pickValue,
+        search_state: this.data.search_state,
+        search_date: this.data.search_date,
+        search_address: this.data.search_address,
+        paid: this.data.switch,
+        search_det_address: this.data.search_det_address,
+        money: this.data.money,
+        search_details: this.data.note,
+        search_name: this.data.search_name,
+        search_tel: this.data.search_tel,
+        search_wx: this.data.search_wx,
+        search_QQ: this.data.search_QQ,
         //目前获取不到openid，暂时就是用123代替下
         def1: '123'
 
@@ -198,7 +192,7 @@ Page({
   },
   bindDateChange: function (e) {
     this.setData({
-      found_date: e.detail.value
+      search_date: e.detail.value
     })
   },
   // 删除图片

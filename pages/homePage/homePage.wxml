@@ -2,7 +2,8 @@
 <lunbo></lunbo>
 <view class='ui_tab'>
   <view class='ui_navbar'>
-    <view class='ui_navbar_item {{barIndex==index?"ui_navbar_item_on":""}}' wx:for="{{barList}}" wx:key="index" data-index="{{index}}" bindtap='clickBar'>{{item}}</view>
+    <view class='ui_navbar_item {{barIndex==index?"ui_navbar_item_on":""}}' wx:for="{{barList}}" wx:key="index"
+      data-index="{{index}}" bindtap='clickBar'>{{item}}</view>
   </view>
   <view wx:if="{{barIndex==0}}">
     <!-- 搜索栏 -->
@@ -16,7 +17,8 @@
       <!-- 自己滚动区域的组件 -->
       <!-- scroll-x就是水平可以滑动 -->
       <scroll-view class="nav" scroll-x>
-        <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="index">
+        <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}"
+          wx:for="{{navList}}" wx:key="index">
           {{item.text}}
         </view>
       </scroll-view>
@@ -32,7 +34,8 @@
             <view class="title2">{{item.found_category}}</view>
             <view class="title3 {{item.found_state==='未认领'?'active':''}}">{{item.found_state}}</view>
             <view class="title1">{{item.found_date}}</view>
-            <view class="title1">{{item.found_address}}</view>
+            <wxs src="../../utils/subutils.wxs" module="tools" />
+            <view class="title1">{{tools.sub(item.found_address,0,3)}}</view>
           </view>
         </view>
       </view>
