@@ -18,7 +18,7 @@ Page({
     country: '',
 
     list: [],
-    searchList:[],
+    searchList: [],
     // 设置一个被点击的时候导航栏菜单的索引
     currentIndexNav: 0,
     // 首页导航数据
@@ -50,6 +50,45 @@ Page({
     queryone: {}
   },
   clickBar: function (e) {
+    if (e.currentTarget.dataset.index == 1) {
+      var that = this;
+      //获取用户的登录信息
+      wx.getUserInfo({
+        success: res => {
+          console.log(res)
+          that.setData({
+            hasUserInfo: true,
+          })
+          var sexx = res.userInfo.gender
+          if (sexx = '1') {
+            sexx = '男'
+          } else {
+            sexx = '女'
+          }
+          wx.request({
+            url: URL.Search_indexQuery,
+            data: {
+              def1: '123',
+              nickName: res.userInfo.nickName,
+              sex: sexx,
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              res = res.data
+              console.log(res)
+              that.setData({
+                'list': res
+              })
+            },
+            fail: function (res) {
+              console.log("获取数据失败，请检查服务器连接是否正常！");
+            }
+          })
+        }
+      })
+    }
     this.setData({
       barIndex: e.currentTarget.dataset.index
     })
@@ -86,10 +125,40 @@ Page({
     })
   },
 
+  activeNav_search(e) {
+    var that = this
+    console.log(e)
+    var i = e.target.dataset.index
+    var search_category = this.data.navList[i].text
+    console.log("found_tag" + search_category)
+    wx.request({
+      url: URL.Search_indexByTag,
+      data: {
+        search_category: search_category
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        res = res.data
+        console.log(res)
+        that.setData({
+          'list': res
+        })
+      },
+      fail: function (res) {
+        console.log("获取数据失败，请检查服务器连接是否正常！");
+      }
+    })
+    this.setData({
+      currentIndexNav: e.target.dataset.index
+    })
+  },
+
   toOrder: function (e) {
-   wx.showLoading({
-     title: '加载中...',
-   })
+    wx.showLoading({
+      title: '加载中...',
+    })
     this.setData({
       num: e.currentTarget.dataset.num
     })
@@ -98,8 +167,23 @@ Page({
     var queryone = this.data.list[i].id
     console.log("###id##" + queryone)
     wx.navigateTo({
-      
       url: '../details/details?id=' + queryone,
+    })
+    wx.hideLoading();
+  },
+  search_toOrder: function (e) {
+    wx.showLoading({
+      title: '加载中...',
+    })
+    this.setData({
+      num: e.currentTarget.dataset.num
+    })
+    var i = this.data.num
+    console.log(i)
+    var queryone = this.data.list[i].id
+    console.log("###id##" + queryone)
+    wx.navigateTo({
+      url: '../search_details/search_details?id=' + queryone,
     })
     wx.hideLoading();
   },
@@ -109,7 +193,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
     //获取用户的登录信息
     wx.getUserInfo({
       success: res => {
@@ -144,13 +227,11 @@ Page({
             that.setData({
               'list': res
             })
-
           },
           fail: function (res) {
             console.log("获取数据失败，请检查服务器连接是否正常！");
           }
         })
-
       }
     })
   },

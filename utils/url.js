@@ -14,7 +14,12 @@ module.exports = {
   Push: Url + 'push.do',
 
 
-  //发表失物寻找
-  Search : Url + 'search.do'
-
+  //丢三落四发表失物寻找
+  Search: Url + 'search.do',
+  //丢三落四主页标签列表查询
+  Search_indexByTag: Url + 'search-indexbytag.do',
+  //丢三落四主页查询
+  Search_indexQuery: Url + 'search-index.do',
+  //丢三落四主页单条详情查询
+  Search_QueryOne: Url + 'search-queryone.do'
 }

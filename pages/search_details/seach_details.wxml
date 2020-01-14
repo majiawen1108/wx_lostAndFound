@@ -1,0 +1,33 @@
+<view class="all" wx:for="{{list}}" wx:key="index">
+  <view class="details-up">
+    <image mode:widthFix src="{{item.image}}"></image>
+  </view>
+  <view class="msg">
+    温馨提示：没有见到或者拿到你的失物之前，索要金钱，邮费等多数是骗子，切勿轻信，请勿必谨慎！
+  </view>
+  <view class="details-down">
+    <view class="title">{{item.search_title}}</view>
+    <view class="category">{{item.search_category}}</view>
+    <view class="info">
+      <view class="info-left">
+        <view>信息编号：</view>
+        <view>失主姓名：</view>
+        <view>拾获日期：{{item.search_date}}</view>
+      </view>
+      <view class="info-right">
+        <view class="">认领状态：{{item.search_state}}</view>
+        <view>证件号后六位：</view>
+        <view>标签：</view>
+      </view>
+    </view>
+    <view>拾获地区：{{item.search_address}}</view>
+    <view>拾获详细地点：{{item.search_det_address}}</view>
+    <view>证件所属地址：</view>
+    <view>详情：{{item.search_details}}</view>
+    <view>发布日期：{{item.send_date}}</view>
+    <view>发布者：{{item.search_name}}</view>
+    <view>联系方式：{{item.search_tel}}</view>
+    <view>微信：{{item.search_wx}}</view>
+    <view>QQ：{{item.search_QQ}}</view>
+  </view>
+</view>

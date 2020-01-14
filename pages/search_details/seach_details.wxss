@@ -1,0 +1,58 @@
+/* pages/details/details.wxss */
+
+
+.msg {
+  font-size: 24rpx;
+  /* color: #989898; */
+  padding: 20rpx;
+  color: #f80000;
+}
+
+.details-up {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-up image {
+  width: 100%;
+  height: 400rpx;
+}
+
+.details-down {
+  padding: 25rpx;
+  color: #989898;
+  font-size: 32rpx;
+}
+
+.details-down view {
+  margin-top: 15rpx;
+}
+
+.title {
+  font-size: 37rpx;
+  margin-left: 25rpx;
+  font-family: 华文中宋;
+  color: black;
+}
+
+.category {
+  margin-left: 25rpx;
+  /* margin-top: 20rpx; */
+  font-size: 40rpx;
+  color: #f90;
+}
+
+
+.info-left {
+  float: left;
+  width: 50%;
+}
+
+.info-right {
+  float: left;
+  width: 50%;
+  text-align: right;
+}
