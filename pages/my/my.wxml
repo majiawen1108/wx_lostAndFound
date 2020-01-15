@@ -15,25 +15,17 @@
     </view>
   </view>
   <view class="my-down">
-    <navigator url="#">
-      <view class="my-send" bindtap="minepush">
-        <text>我发布的拾物招领</text>
-      </view>
-    </navigator>
-    <navigator url="#">
-      <view class="my-send">
-        <text>我发布的失物招领</text>
-      </view>
-    </navigator>
-    <navigator url="#">
-      <view class="my-send">
-        <text>帮助</text>
-      </view>
-    </navigator>
-    <navigator url="#">
-      <view class="my-send">
-        <text>退出登录</text>
-      </view>
-    </navigator>
+    <view class="my-send" bindtap="minepush">
+      <text>我发布的拾物招领</text>
+    </view>
+    <view class="my-send" bindtap="minesearch">
+      <text>我发布的失物招领</text>
+    </view>
+    <view class="my-send">
+      <text>帮助</text>
+    </view>
+    <view class="my-send">
+      <text>退出登录</text>
+    </view>
   </view>
 </view>

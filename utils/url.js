@@ -21,5 +21,9 @@ module.exports = {
   //丢三落四主页查询
   Search_indexQuery: Url + 'search-index.do',
   //丢三落四主页单条详情查询
-  Search_QueryOne: Url + 'search-queryone.do'
+  Search_QueryOne: Url + 'search-queryone.do',
+  //我发表的失物查询
+  MineSearch: Url + 'search-minepush.do',
+  //我发表的失物删除功能
+  Search_Delete: Url + 'search-delete.do'
 }

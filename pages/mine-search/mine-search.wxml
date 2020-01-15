@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="product-list">
+    <view class="product-item" wx:for="{{list}}" wx:key="index" bindtap="toOrder" data-num="{{index}}">
+      <movable-area>
+        <movable-view out-of-bounds="true" direction="horizontal" x="{{item.xmove}}" inertia="true"
+          data-productIndex="{{index}}" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd"
+          bindchange="handleMovableChange">
+          <view class="page-info-img">
+            <image mode:widthFix class="image" src="{{item.image}}"></image>
+          </view>
+          <view class="page-info-msg">
+            <view class="title">{{item.search_title}}</view>
+            <view>
+              <view class="title2">{{item.search_category}}</view>
+              <view class="title3 {{item.found_state==='未认领'?'active':''}}">{{item.search_state}}</view>
+              <view class="title1">{{item.search_date}}</view>
+              <wxs src="../../utils/subutils.wxs" module="search_tools" />
+              <view class="title1">{{search_tools.sub(item.search_address,0,3)}}</view>
+            </view>
+          </view>
+        </movable-view>
+      </movable-area>
+      <view class="delete-btn" data-id="{{item.id}}" bindtap="handleDeleteProduct">删除</view>
+    </view>
+  </view>
+</view>

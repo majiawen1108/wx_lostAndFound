@@ -8,9 +8,14 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
 
   },
-  minepush: function() {
+  minepush: function () {
     wx.navigateTo({
       url: '../mine-push/mine-push',
+    })
+  },
+  minesearch: function () {
+    wx.navigateTo({
+      url: '../mine-search/mine-search',
     })
   },
   /**
@@ -19,7 +24,7 @@ Page({
   onLoad: function (options) {
     wx.getUserInfo({
       success: res => {
-        console.log(res)    //获取的用户信息还有很多，都在res中，看打印结果
+        console.log(res) //获取的用户信息还有很多，都在res中，看打印结果
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -28,7 +33,7 @@ Page({
     })
 
   },
-  
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -78,5 +83,5 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
+
 })

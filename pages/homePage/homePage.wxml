@@ -69,7 +69,7 @@
           <view class="title">{{item.search_title}}</view>
           <view>
             <view class="title2">{{item.search_category}}</view>
-            <view class="title3 {{item.found_state==='未认领'?'active':''}}">{{item.search_state}}</view>
+            <view class="title3 {{item.search_state==='未找到'?'active':''}}">{{item.search_state}}</view>
             <view class="title1">{{item.search_date}}</view>
             <wxs src="../../utils/subutils.wxs" module="search_tools" />
             <view class="title1">{{search_tools.sub(item.search_address,0,3)}}</view>
