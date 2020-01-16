@@ -15,6 +15,9 @@
   align-items: center;
   justify-content: center;
 }
+.tip{
+  color: #f80000;
+}
 
 .details-up image {
   width: 100%;

@@ -54,7 +54,31 @@ Page({
       }
     })
   },
-
+  telPhone: function () {
+    console.log(this.data.list[0].found_tel)
+    wx.makePhoneCall({
+      phoneNumber: this.data.list[0].found_tel,
+    })
+  },
+  copy_wx: function () {
+    console.log(this.data.list[0].found_wx)
+    wx.setClipboardData({
+      data:this.data.list[0].found_wx,
+      // success: function (res) {
+      //   wx.showModal({
+      //     title: '提示',
+      //     content: '复制成功',
+      //     showCancel: false
+      //   });
+      // }
+    })
+  },
+  copy_QQ: function () {
+    console.log(this.data.list[0].found_QQ)
+    wx.setClipboardData({
+      data:this.data.list[0].found_QQ,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

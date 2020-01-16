@@ -26,8 +26,9 @@
     <view>详情：{{item.found_details}}</view>
     <view>发布日期：{{item.send_date}}</view>
     <view>发布者：{{item.found_name}}</view>
-    <view>联系方式：{{item.found_tel}}</view>
-    <view>微信：{{item.found_wx}}</view>
-    <view>QQ：{{item.found_QQ}}</view>
+    <view>联系方式：{{item.found_tel}}<text class="tip" wx-if="{{item.found_tel != '未填写'}}" bindtap="telPhone">直接拨打</text>
+    </view>
+    <view>微信：{{item.found_wx}}<text class="tip" wx-if="{{item.found_wx != '未填写'}}" bindtap="copy_wx">复制</text></view>
+    <view>QQ：{{item.found_QQ}}<text class="tip" wx-if="{{item.found_QQ != '未填写'}}" bindtap="copy_QQ">复制</text></view>
   </view>
 </view>

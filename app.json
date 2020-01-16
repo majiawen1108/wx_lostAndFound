@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/homePage/homePage",
+    "pages/details/details",
     "pages/mine-search/mine-search",
     "pages/search_details/search_details",
     "pages/search/search",
@@ -11,8 +12,7 @@
     "pages/mine-push/mine-push",
     "pages/my/my",
     "pages/logs/logs",
-    "pages/sendMsg/sendMsg",
-    "pages/details/details"
+    "pages/sendMsg/sendMsg"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FF9900",
@@ -28,13 +28,13 @@
     "backgroundColor": "#f8f9fb",
     "list": [
       {
-        "text": "失物招领",
+        "text": "主页",
         "pagePath": "pages/homePage/homePage",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home-actived.png"
       },
       {
-        "text": "发布信息",
+        "text": "发布",
         "pagePath": "pages/sendMsg/sendMsg",
         "iconPath": "images/add.png",
         "selectedIconPath": "images/add-actived.png"

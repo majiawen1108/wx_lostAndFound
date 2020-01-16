@@ -156,7 +156,7 @@ Page({
       money: e.detail.value.money == null ? '0' : e.detail.value.money,
       search_details: e.detail.value.search_details == '' ? '未填写' : e.detail.value.search_details,
       search_name: e.detail.value.search_name == '' ? '未填写' : e.detail.value.search_name,
-      search_tel: e.detail.value.search_tel,
+      search_tel: e.detail.value.search_tel == '' ? '未填写' :e.detail.value.search_tel,
       search_wx: e.detail.value.search_wx == '' ? '未填写' : e.detail.value.search_wx,
       search_QQ: e.detail.value.search_QQ == '' ? '未填写' : e.detail.value.search_QQ,
 

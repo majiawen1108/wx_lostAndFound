@@ -1,8 +1,5 @@
 /* pages/details/details.wxss */
 
-.all {
-}
-
 .msg {
   font-size: 24rpx;
   /* color: #989898; */
@@ -47,9 +44,7 @@
   color: #f90;
 }
 
-.info {
-  /* margin-top:20rpx; */
-}
+
 
 .info-left {
   float: left;
@@ -60,4 +55,7 @@
   float: left;
   width: 50%;
   text-align: right;
+}
+.tip{
+  color: #f80000;
 }

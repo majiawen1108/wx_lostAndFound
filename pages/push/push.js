@@ -155,7 +155,7 @@ Page({
       id_address: e.detail.value.id_address == '' ? '未填写' : e.detail.value.id_address,
       found_details: e.detail.value.found_details == '' ? '未填写' : e.detail.value.found_details,
       found_name: e.detail.value.found_name == '' ? '未填写' : e.detail.value.found_name,
-      found_tel: e.detail.value.found_tel,
+      found_tel: e.detail.value.found_tel  == '' ? '未填写' : e.detail.value.found_tel,
       found_wx: e.detail.value.found_wx == '' ? '未填写' : e.detail.value.found_wx,
       found_QQ: e.detail.value.found_QQ == '' ? '未填写' : e.detail.value.found_QQ,
       def1: e.detail.value.def1,
