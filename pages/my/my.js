@@ -18,6 +18,11 @@ Page({
       url: '../mine-search/mine-search',
     })
   },
+  exit:function(){
+    wx.reLaunch({
+      url: '../index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

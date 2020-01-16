@@ -3,5 +3,6 @@
   "usingComponents": {
     "lunbo":"../../components/lunbo/lunbo",
     "home-body": "../../components/home-body/home-body"
-  }
+  },
+  "enablePullDownRefresh": true
 }

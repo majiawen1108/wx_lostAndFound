@@ -19,7 +19,6 @@
     "navigationBarTitleText": "欢迎进入失物招领系统",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark",
-    "enablePullDownRefresh": true,
     "backgroundColor": "#404040"
   },
   "tabBar": {
