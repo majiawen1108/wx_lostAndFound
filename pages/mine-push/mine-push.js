@@ -9,7 +9,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    check: 'true'
+
   },
 
   onLoad: function () {
@@ -31,10 +31,16 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        that.setData({
-          check: 'flase'
+        wx.showLoading({
+          title: '删除中',
         })
         that.onLoad()
+        wx.hideLoading()
+        wx.showToast({
+          title: '删除成功！',
+          icon: 'success',
+          duration: 1000
+        })
         console.log("删除成功！");
       },
       fail: function (res) {
@@ -52,11 +58,9 @@ Page({
     console.log(i)
     var queryone = this.data.list[i].id
     console.log("###" + queryone)
-    if (this.data.check == 'true') {
-      wx.navigateTo({
-        url: '../details/details?id=' + queryone,
-      })
-    }
+    wx.navigateTo({
+      url: '../details/details?id=' + queryone,
+    })
   },
   /**
    * 显示删除按钮

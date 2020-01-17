@@ -1,5 +1,6 @@
+var Url = 'http://172.20.10.4/laf/';
 // var Url = 'http://172.20.10.3/laf/';
-var Url = 'http://localhost/laf/';
+// var Url = 'http://localhost/laf/';
 module.exports = {
   //拾金不昧主页查询
   indexQuery: Url + 'index.do',

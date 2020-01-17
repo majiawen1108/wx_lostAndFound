@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "select": "../../components/select/select"
+  
   },
   "navigationBarTitleText": "发布拾物"
 }

@@ -20,7 +20,7 @@
           </view>
         </movable-view>
       </movable-area>
-      <view class="delete-btn" data-id="{{item.id}}" bindtap="handleDeleteProduct">删除</view>
+      <view class="delete-btn" data-id="{{item.id}}" catchtap="handleDeleteProduct" hover-stop-propagation='true'>删除</view>
     </view>
   </view>
 </view>
