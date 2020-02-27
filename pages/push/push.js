@@ -10,6 +10,7 @@ Page({
    */
   data: {
     //图片
+    tempFilePaths:[],
     uploaderList: [],
     uploaderNum: 0,
     showUpload: true,
@@ -163,7 +164,7 @@ Page({
     wx.request({
       url: URL.Push,
       data: {
-        image: '../../images/lost.jpg',
+        image: this.data.tempFilePaths,
         found_title: this.data.found_title,
         found_category: this.data.pickValue,
         found_state: this.data.found_state,
@@ -174,7 +175,7 @@ Page({
         found_tag: this.data.found_tag,
         found_det_address: this.data.found_det_address,
         id_address: this.data.id_address,
-        found_details: this.data.note,
+        found_details: this.data.found_details,
         found_name: this.data.found_name,
         found_tel: this.data.found_tel,
         found_wx: this.data.found_wx,
@@ -237,7 +238,7 @@ Page({
   upload: function (e) {
     var that = this;
     wx.chooseImage({
-      count: 9 - that.data.uploaderNum, // 默认9
+      count: 3 - that.data.uploaderNum, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -245,12 +246,13 @@ Page({
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         let tempFilePaths = res.tempFilePaths;
         let uploaderList = that.data.uploaderList.concat(tempFilePaths);
-        if (uploaderList.length == 9) {
+        if (uploaderList.length == 3) {
           that.setData({
             showUpload: false
           })
         }
         that.setData({
+          tempFilePaths:tempFilePaths,
           uploaderList: uploaderList,
           uploaderNum: uploaderList.length,
         })

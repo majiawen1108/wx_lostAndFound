@@ -1,8 +1,9 @@
-<view class='ui_cell'>
-  <view class='ui_cell_bd ui_cell_bd_must'>选择地址</view>
-  <picker mode="region" bindchange="bindRegionChange" value="{{detailed}}" custom-item="{{customItem}}"
-name="detailed" class='ui_cell_picker' >
-    <view class="picker {{clas}}" >{{detailed}}</view>
-  </picker>
-  <view class='ui_cell_right'></view>
-</view>
+<view class='page_row' bindtap="suo">  
+  <view class="search">  
+    <view class="df search_arr">  
+      <icon class="searchcion" size='20' type='search'></icon>  
+      <input class="" disabled placeholder="请输入关键字" value="{{searchValue}}"/>  
+    </view>  
+  </view>  
+  <view class='sousuo'>搜索</view>  
+</view>  

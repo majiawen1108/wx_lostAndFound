@@ -18,8 +18,17 @@
           <view class='ui_cell_right'></view>
         </view>
       </view>
+      <view class='ui_uploader_cell'>
+        <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="index">
+          <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="20"
+            color="red" />
+          <image bindtap='showImg' data-index="{{index}}" src='{{item}}'></image>
+        </view>
+        <view class='ui_uploader' bindtap='upload' wx:if="{{showUpload}}"></view>
+      </view>
+
       <view class="">
-        <textarea maxlength='200' bindinput='note' placeholder='请输入详情，方便失主更清晰的了解你所拾得的物品'>
+        <textarea name="found_details" maxlength='200' bindinput='note' placeholder='请输入详情，方便失主更清晰的了解你所拾得的物品'>
           <text class='eColor'>{{length}}/200</text>
         </textarea>
       </view>
@@ -41,7 +50,7 @@
         <picker mode="region" bindchange="bindRegionChange" value="{{detailed}}" custom-item="{{customItem}}"
           name="detailed" class='ui_cell_picker'>
           <input name="found_address" type="text" value="{{detailed}}" disabled="true" class='ui_cell_input'
-          placeholder="请选择" />
+            placeholder="请选择" />
         </picker>
         <view class='ui_cell_right'></view>
       </view>

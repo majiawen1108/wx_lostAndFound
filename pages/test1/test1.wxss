@@ -1,182 +1,40 @@
-/* 侧边栏样式 */
-
-.page-slidebar {
-  height: 100%;
-  width: 750rpx;
-  position: fixed;
-  background-color: #fff;
-  z-index: 0;
-}
-
-/* 控制侧边栏的内容距离顶部的距离 */
-
-.page-content {
-  padding-top: 60rpx;
-}
-
-/* 侧边栏内容的 css 样式 */
-
-.wc {
-  width: 448rpx;
-  color: black;
-  border-bottom: 1px solid #eee;
-  height: 100rpx;
-  line-height: 100rpx;
-  text-align: center;
-}
-
-.wc.active {
-  background-color: #e8e8e8;
-  width: 448rpx;
-  color: green;
-  font-size: 40rpx;
-  height: 100rpx;
-  line-height: 100rpx;
-  text-align: center;
-}
-
-/* 当屏幕向左滑动，出现侧边栏的时候，主页的动画样式 */
-
-/* scale：取值范围 0~1 ，表示屏幕大小是原来的百分之几，可以自己修改成 0.8 试下*/
-
-/* translate(60%,0%) 表示向左滑动的时候，侧边栏占用平时的宽度为 60%   */
-
-.c-state {
-  transform: rotate(0deg) scale(1) translate(60%, 0%);
-  -webkit-transform: rotate(0deg) scale(1) translate(60%, 0%);
-}
-
-/* 主页样式 */
-
-.page-top {
-  height: 100%;
-  position: relative;
-  width: 750rpx;
-  background-color: white;
-  z-index: 0;
-  transition: All 0.4s ease;
-  -webkit-transition: All 0.4s ease;
-}
-
-/* 遮盖层样式 */
-
-.cover {
-  width: 100%;
-  height: 100%;
-  background-color: #d8d8d8;
-  opacity: 0.5;
-  z-index: 9000;
-}
-
-.content {
-  margin-top: 100rpx;
-}
-
-swiper {
-  width: 100%;
-}
-
-swiper-item {
-}
-
-image {
-  width: 100%;
-}
-
-/*导航栏 */
-
-.nav_wrap {
-  color: #666;
-}
-
-.nav {
-  white-space: nowrap;
-  padding: 5rpx 0;
-}
-
-.nav_item {
-  padding: 20rpx 45rpx;
-  font-size: 32rpx;
-  display: inline-block;
-}
-
-.nav_item.active {
-  border-bottom: 5rpx solid #de688b;
-  font-size: 40rpx;
-  color: black;
-}
-
-/* 主要内容的wxss */
-
-.container {
-  /* overflow: hidden; */
-  padding: 0;
-  margin: 1rpx;
-  background-color: #f0f0f0;
-  /* border: 1px solid black; */
-}
-
-.page-info {
-  padding-left: 2rpx;
-  border-radius: 20rpx;
-  background-color: white;
-  border-bottom: 2rpx solid #d8d8d8;
-  align-content: flex-start;
-  width: 98%;
-  height: auto;
-}
-
-.page-info-img {
-  width: 28%;
-  float: left;
-}
-
-.page-info-img .image {
-  height: 235rpx;
-  border-radius: 20rpx;
-}
-
-.page-info-msg {
-  width: 72%;
-  float: left;
-}
-
-.title {
-  font-size: 33rpx;
-  margin-left: 25rpx;
-  font-family: 华文中宋;
-}
-
-.title1 {
-  float: left;
-  font-size: 30rpx;
-  margin: 25rpx;
-  color: #989898;
-}
-
-.title2 {
-  margin-left: 25rpx;
-  margin-top: 30rpx;
-  font-size: 30rpx;
-  color: #f90;
-}
-
-.title3 {
-  float: left;
-  font-size: 30rpx;
-  margin: 25rpx;
-  color: #989898;
-}
-
-.title3.active {
-  float: left;
-  font-size: 30rpx;
-  margin: 25rpx;
-  color: #f80000;
-}
-
-/* 失物招领 */
-
-.search {
-  height: 1200rpx;
-}
+.search{  
+  width: 80%;  
+}  
+.search_arr {  
+  border: 1px solid #d0d0d0;  
+  border-radius: 10rpx;  
+  margin-left: 20rpx;  
+}  
+.search_arr input{  
+  margin-left: 60rpx;  
+  height: 60rpx;  
+  border-radius: 5px;  
+}  
+.bc_text {  
+  line-height: 68rpx;  
+  height: 68rpx;  
+  margin-top: 34rpx;  
+}  
+  
+.sousuo {  
+  margin-left: 15rpx;  
+  width: 15%;  
+  line-height: 150%;  
+  text-align: center;  
+  border: 1px solid #d0d0d0;  
+  border-radius: 10rpx;  
+}  
+.page_row{  
+  display: flex;  
+  flex-direction: row  
+}  
+.searchcion {  
+  margin: 10rpx 10rpx 10rpx 10rpx;  
+  position: absolute;  
+  left:25rpx;  
+  z-index: 2;  
+  width: 20px;  
+  height: 20px;  
+  text-align: center;  
+}  

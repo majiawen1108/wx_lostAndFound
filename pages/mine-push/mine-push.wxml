@@ -12,7 +12,7 @@
             <view class="title">{{item.found_title}}</view>
             <view>
               <view class="title2">{{item.found_category}}</view>
-              <view class="title3 {{item.found_state==='未认领'?'active':''}}">{{item.found_state}}</view>
+              <view class="title3 {{item.found_state==='未认领'?'active':''}}" catchtap="updateState" hover-stop-propagation='true'>{{item.found_state}}</view>
               <view class="title1">{{item.found_date}}</view>
               <wxs src="../../utils/subutils.wxs" module="tools" />
               <view class="title1">{{tools.sub(item.found_address,0,3)}}</view>

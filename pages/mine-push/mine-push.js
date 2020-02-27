@@ -48,7 +48,10 @@ Page({
       }
     })
   },
-
+  updateState:function(e){
+    console.log(e)
+    console.log(13)
+  },
   /**查询单条将当前条的id带给详情页 */
   toOrder: function (e) {
     this.setData({
@@ -75,7 +78,6 @@ Page({
    */
   hideDeleteButton: function (e) {
     let productIndex = e.currentTarget.dataset.productindex
-
     this.setXmove(productIndex, 0)
   },
 
@@ -151,7 +153,6 @@ Page({
           success: function (res) {
             res = res.data
             console.log(res)
-
             that.setData({
               'list': res,
               check: 'true'
