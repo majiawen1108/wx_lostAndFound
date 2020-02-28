@@ -9,7 +9,8 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-
+    touchStart: '',
+    touchEnd: ''
   },
 
   onLoad: function () {
@@ -48,23 +49,29 @@ Page({
       }
     })
   },
-  updateState:function(e){
-    console.log(e)
-    console.log(13)
-  },
+  // updateState: function (e) {
+  //   console.log(e)
+  //   console.log(13)
+  //   wx.showModal({
+  //     cancelColor: 'cancelColor',
+  //     title: '更换状态',
+  //     content: '点击确定后更改为已认领'
+  //   })
+  // },
+
   /**查询单条将当前条的id带给详情页 */
-  toOrder: function (e) {
-    this.setData({
-      num: e.currentTarget.dataset.num
-    })
-    var i = this.data.num
-    console.log(i)
-    var queryone = this.data.list[i].id
-    console.log("###" + queryone)
-    wx.navigateTo({
-      url: '../details/details?id=' + queryone,
-    })
-  },
+  // toOrder: function (e) {
+  //   this.setData({
+  //     num: e.currentTarget.dataset.num
+  //   })
+  //   var i = this.data.num
+  //   console.log(i)
+  //   var queryone = this.data.list[i].id
+  //   console.log("###" + queryone)
+  //   wx.navigateTo({
+  //     url: '../details/details?id=' + queryone,
+  //   })
+  // },
   /**
    * 显示删除按钮
    */
@@ -165,5 +172,71 @@ Page({
 
       }
     })
+  },
+  //单击单条数据和长按单条数据
+  touchStart: function (e) {
+    var that = this;
+    that.setData({
+      touchStart: e.timeStamp
+    })
+  },
+  touchEnd: function (e) {
+    var that = this;
+    that.setData({
+      touchEnd: e.timeStamp
+    })
+  },
+  pressTap: function (e) {
+    var that = this;
+    var touchTime = that.data.touchEnd - that.data.touchStart;
+
+    /**查询单条将当前条的id带给详情页 */
+    that.setData({
+      num: e.currentTarget.dataset.num
+    })
+    var i = this.data.num
+    console.log(i)
+    var queryone = this.data.list[i].id
+    console.log("###" + queryone)
+
+    if (touchTime > 1000) { //自定义长按时长，单位为ms
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        title: '更换状态',
+        content: '点击确定后更改为已认领',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            wx.request({
+              url: URL.Update,
+              data: {
+                def1: '123',
+                id:queryone
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                that.onLoad()
+                wx.showToast({
+                  title: '操作成功！', // 标题
+                  icon: 'success',  // 图标类型，默认success
+                  duration: 1000  // 提示窗停留时间，默认1500ms
+                })
+              },
+              fail: function (res) {
+                console.log("获取数据失败，请检查服务器连接是否正常！");
+              }
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '../details/details?id=' + queryone,
+      })
+    }
   }
 })

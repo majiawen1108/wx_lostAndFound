@@ -9,6 +9,7 @@ Page({
    */
   data: {
     //图片
+    tempFilePaths: [],
     uploaderList: [],
     uploaderNum: 0,
     showUpload: true,
@@ -156,7 +157,7 @@ Page({
       money: e.detail.value.money == null ? '0' : e.detail.value.money,
       search_details: e.detail.value.search_details == '' ? '未填写' : e.detail.value.search_details,
       search_name: e.detail.value.search_name == '' ? '未填写' : e.detail.value.search_name,
-      search_tel: e.detail.value.search_tel == '' ? '未填写' :e.detail.value.search_tel,
+      search_tel: e.detail.value.search_tel == '' ? '未填写' : e.detail.value.search_tel,
       search_wx: e.detail.value.search_wx == '' ? '未填写' : e.detail.value.search_wx,
       search_QQ: e.detail.value.search_QQ == '' ? '未填写' : e.detail.value.search_QQ,
 
@@ -164,7 +165,7 @@ Page({
     wx.request({
       url: URL.Search,
       data: {
-        image: '../../images/lost.jpg',
+        image: this.data.tempFilePaths,
         search_title: this.data.search_title,
         search_category: this.data.pickValue,
         search_state: this.data.search_state,
@@ -194,7 +195,7 @@ Page({
         })
         setTimeout(function () {
           wx.reLaunch({
-            url: '../homePage/homePage?search_barindex='+"1",
+            url: '../homePage/homePage?search_barindex=' + "1",
           })
         }, 1500)
       }
@@ -235,7 +236,7 @@ Page({
   upload: function (e) {
     var that = this;
     wx.chooseImage({
-      count: 9 - that.data.uploaderNum, // 默认9
+      count: 3 - that.data.uploaderNum, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -243,12 +244,13 @@ Page({
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         let tempFilePaths = res.tempFilePaths;
         let uploaderList = that.data.uploaderList.concat(tempFilePaths);
-        if (uploaderList.length == 9) {
+        if (uploaderList.length == 3) {
           that.setData({
             showUpload: false
           })
         }
         that.setData({
+          tempFilePaths: tempFilePaths,
           uploaderList: uploaderList,
           uploaderNum: uploaderList.length,
         })

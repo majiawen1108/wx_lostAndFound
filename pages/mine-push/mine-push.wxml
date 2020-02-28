@@ -1,6 +1,7 @@
 <view class="container">
   <view class="product-list">
-    <view class="product-item" wx:for="{{list}}" wx:key="index" bindtap="toOrder" data-num="{{index}}">
+    <view class="product-item" wx:for="{{list}}" wx:key="index" bindtouchstart='touchStart' bindtouchend='touchEnd'
+      bindtap="pressTap" data-num="{{index}}">
       <movable-area>
         <movable-view out-of-bounds="true" direction="horizontal" x="{{item.xmove}}" inertia="true"
           data-productIndex="{{index}}" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd"
@@ -12,7 +13,8 @@
             <view class="title">{{item.found_title}}</view>
             <view>
               <view class="title2">{{item.found_category}}</view>
-              <view class="title3 {{item.found_state==='未认领'?'active':''}}" catchtap="updateState" hover-stop-propagation='true'>{{item.found_state}}</view>
+              <view class="title3 {{item.found_state==='未认领'?'active':''}}" hover-stop-propagation='true'>
+                {{item.found_state}}</view>
               <view class="title1">{{item.found_date}}</view>
               <wxs src="../../utils/subutils.wxs" module="tools" />
               <view class="title1">{{tools.sub(item.found_address,0,3)}}</view>
@@ -20,7 +22,8 @@
           </view>
         </movable-view>
       </movable-area>
-      <view class="delete-btn" data-id="{{item.id}}" catchtap="handleDeleteProduct" hover-stop-propagation='true'>删除</view>
+      <view class="delete-btn" data-id="{{item.id}}" catchtap="handleDeleteProduct" hover-stop-propagation='true'>删除
+      </view>
     </view>
   </view>
 </view>
