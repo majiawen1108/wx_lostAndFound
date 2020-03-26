@@ -201,9 +201,10 @@ Page({
 
     if (touchTime > 1000) { //自定义长按时长，单位为ms
       wx.showModal({
-        cancelColor: 'cancelColor',
+        cancelColor: 'skyblue',
         title: '更换状态',
         content: '点击确定后更改为已认领',
+        showCancel: false,        
         success(res) {
           if (res.confirm) {
             console.log('用户点击确定')

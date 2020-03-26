@@ -60,44 +60,27 @@ Page({
       clickBarURL = URL.indexQuery
     }
     var that = this;
-    //获取用户的登录信息
-    wx.getUserInfo({
-      success: res => {
+
+    wx.request({
+      url: clickBarURL,
+      data: {
+        def1: '123',
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        res = res.data
         console.log(res)
         that.setData({
-          hasUserInfo: true,
+          'list': res
         })
-        var sexx = res.userInfo.gender
-        if (sexx = '1') {
-          sexx = '男'
-        } else {
-          sexx = '女'
-        }
-        wx.request({
-          url: clickBarURL,
-          data: {
-            def1: '123',
-            nickName: res.userInfo.nickName,
-            sex: sexx,
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            res = res.data
-            console.log(res)
-            that.setData({
-              'list': res
-            })
-            wx.hideLoading()
-          },
-          fail: function (res) {
-            console.log("获取数据失败，请检查服务器连接是否正常！");
-          }
-        })
+        wx.hideLoading()
+      },
+      fail: function (res) {
+        console.log("获取数据失败，请检查服务器连接是否正常！");
       }
     })
-
     this.setData({
       barIndex: e.currentTarget.dataset.index
     })
@@ -208,26 +191,10 @@ Page({
     //   })
     // } 
     var that = this;
-    //获取用户的登录信息
-    wx.getUserInfo({
-      success: res => {
-        console.log(res)
-        that.setData({
-          hasUserInfo: true,
-        })
-        var sexx = res.userInfo.gender
-        if (sexx = '1') {
-          sexx = '男'
-        } else {
-          sexx = '女'
-        }
+  
         wx.request({
           url: URL.indexQuery,
-          data: {
-            def1: '123',
-            nickName: res.userInfo.nickName,
-            sex: sexx,
-          },
+         
           header: {
             'content-type': 'application/json'
           },
@@ -248,8 +215,7 @@ Page({
             console.log("获取数据失败，请检查服务器连接是否正常！");
           }
         })
-      }
-    })
+     
   },
   search: function (e) {
     console.log(e.detail.value)
@@ -306,4 +272,9 @@ Page({
   onShareAppMessage: function () {
 
   },
+  onPullDownRefresh: function () {
+    this.onLoad()
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
+  }
 })

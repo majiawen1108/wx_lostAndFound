@@ -1,0 +1,19 @@
+<view class="all">
+  <view class="top">
+    用户登录
+  </view>
+  <view class="middle">
+    <form bindsubmit='loginOn'>
+      <view class='ui_cell'>
+        <text class='ui_cell_bd ui_cell_bd_must'>用户名:</text>
+        <input name="username" type="text" class='ui_cell_input' />
+      </view>
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">密码:</text>
+        <input name="password" type="password" class='ui_cell_input' />
+      </view>
+      <button formType="submit" type='primary' class='ui_btn ui_btn_primary '>立即登录</button>
+    </form>
+    <view class='ui_btn ui_btn_primary' bindtap='toRegister'>没有账号，马上注册</view>
+  </view> 
+</view>

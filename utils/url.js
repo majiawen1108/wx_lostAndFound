@@ -1,6 +1,6 @@
 // var Url = 'http://172.20.10.4/laf/';
-// var Url = 'http://172.20.10.3/laf/';
-var Url = 'http://localhost/laf/';
+var Url = 'http://172.20.10.3/laf/';
+// var Url = 'http://localhost/laf/';
 module.exports = {
   //拾金不昧主页查询
   indexQuery: Url + 'index.do',
@@ -31,5 +31,9 @@ module.exports = {
   //我发表的失物删除功能
   Search_Delete: Url + 'search-delete.do',
   //我发表的失物修改状态功能
-  Search_Update: Url + 'search-update.do'
+  Search_Update: Url + 'search-update.do',
+
+  //登录注册
+  LoginOn: Url + 'userlogin.do',
+  Register:Url + 'userregister.do'
 }

@@ -195,6 +195,7 @@ Page({
         cancelColor: 'cancelColor',
         title: '更换状态',
         content: '点击确定后更改为已找到',
+        showCancel: false,
         success(res) {
           if (res.confirm) {
             console.log('用户点击确定')

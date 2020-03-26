@@ -1,10 +1,12 @@
 {
-  "pages": [
-    "pages/mine-search/mine-search",
-    "pages/search/search",
+  "pages": [    
     "pages/homePage/homePage",
-    "pages/mine-push/mine-push",
+    "pages/register/register",  
+    "pages/loginOn/loginOn",
+    "pages/search/search",
     "pages/push/push",
+    "pages/mine-search/mine-search",
+    "pages/mine-push/mine-push",
     "pages/details/details",
     "pages/search_details/search_details",
     "pages/test1/test1",
@@ -13,6 +15,7 @@
     "pages/my/my",
     "pages/logs/logs",
     "pages/sendMsg/sendMsg"
+    
   ],
   "window": {
     "navigationBarBackgroundColor": "#FF9900",
@@ -26,7 +29,8 @@
     "selectedColor": "#000000",
     "borderStyle": "white",
     "backgroundColor": "#f8f9fb",
-    "list": [{
+    "list": [
+      {
         "text": "主页",
         "pagePath": "pages/homePage/homePage",
         "iconPath": "images/home.png",

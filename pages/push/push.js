@@ -1,4 +1,5 @@
 // pages/push/push.js
+import WxValidate from '../../utils/WxValidate.js'
 //获取应用实例
 var calls = require("../../utils/city.js")
 const app = getApp()
@@ -10,7 +11,8 @@ Page({
    */
   data: {
     //图片
-    tempFilePaths:[],
+    base64Img: [],
+    tempFilePaths: [],
     uploaderList: [],
     uploaderNum: 0,
     showUpload: true,
@@ -48,6 +50,18 @@ Page({
     //省市联动
     customItem: [],
     detailed: '',
+    //表单验证
+    form: {
+      found_title: '',
+      found_tel: '',
+      found_category: '',
+      found_date: '',
+      found_address: '',
+      found_det_address: '',
+      found_name: '',
+      found_QQ: '',
+      found_wx: ''
+    }
   },
   // picker
   picker: function (e) {
@@ -87,7 +101,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initValidate() //验证规则函数
   },
 
   /**
@@ -142,9 +156,15 @@ Page({
   subPush: function (e) {
     var that = this
     console.log(e.detail.value)
+    const params = e.detail.value
+    //校验表单
+    if (!that.WxValidate.checkForm(params)) {
+      const error = that.WxValidate.errorList[0]
+      that.showModal(error)
+      return false
+    }
     that.setData({
       found_title: e.detail.value.found_title,
-      image: e.detail.value.image,
       found_category: e.detail.value.found_category,
       found_state: e.detail.value.found_state == null ? '未认领' : e.detail.value.found_state,
       found_date: e.detail.value.found_date,
@@ -156,14 +176,14 @@ Page({
       id_address: e.detail.value.id_address == '' ? '未填写' : e.detail.value.id_address,
       found_details: e.detail.value.found_details == '' ? '未填写' : e.detail.value.found_details,
       found_name: e.detail.value.found_name == '' ? '未填写' : e.detail.value.found_name,
-      found_tel: e.detail.value.found_tel  == '' ? '未填写' : e.detail.value.found_tel,
+      found_tel: e.detail.value.found_tel == '' ? '未填写' : e.detail.value.found_tel,
       found_wx: e.detail.value.found_wx == '' ? '未填写' : e.detail.value.found_wx,
       found_QQ: e.detail.value.found_QQ == '' ? '未填写' : e.detail.value.found_QQ,
-      def1: e.detail.value.def1,
     })
     wx.request({
       url: URL.Push,
       data: {
+        def2: this.data.base64Img,
         image: this.data.tempFilePaths,
         found_title: this.data.found_title,
         found_category: this.data.pickValue,
@@ -243,7 +263,9 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         console.log(res)
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
+        // that.urlTobase64(res.tempFilePaths[0])     
         let tempFilePaths = res.tempFilePaths;
         let uploaderList = that.data.uploaderList.concat(tempFilePaths);
         if (uploaderList.length == 3) {
@@ -252,11 +274,89 @@ Page({
           })
         }
         that.setData({
-          tempFilePaths:tempFilePaths,
+          tempFilePaths: tempFilePaths,
           uploaderList: uploaderList,
           uploaderNum: uploaderList.length,
         })
       }
     })
   },
+
+  //报错 
+  showModal(error) {
+    wx.showModal({
+      content: error.msg,
+      showCancel: false,
+    })
+  },
+  //验证函数
+  initValidate() {
+    const rules = {
+      found_title: {
+        required: true,
+        maxlength:8
+      },
+      found_tel: {
+        required: true,
+        tel: true
+      },
+      found_category: {
+        required: true
+      },
+      found_date: {
+        required: true
+      },
+      found_address: {
+        required: true
+      },
+      found_det_address: {
+        required: true
+      },
+      found_name: {
+        required: true
+      },
+      found_QQ: {
+        required: true,
+        digits:true
+      },
+      found_wx: {
+        required: true
+      }
+    }
+    const messages = {
+      found_title: {
+        required: '请填写标题',
+        maxlength:'标题最多8个字'
+      },
+      found_tel: {
+        required: '请填写手机号',
+        tel: '请填写正确的手机号'
+      },
+      found_category: {
+        required: '请选择类别',
+      },
+      found_date: {
+        required: '请选择拾获日期',
+      },
+      found_address: {
+        required: '请选择拾获地址'
+      },
+      found_det_address: {
+        required: '请输入详细地址'
+      },
+      found_name: {
+        required: '请输入您的姓名'
+      },
+      found_QQ: {
+        required: '请输入您的QQ',
+        digits:'QQ只能是数字'
+      },
+      found_wx: {
+        required: '请输入您的微信'
+      }
+    }
+    this.WxValidate = new WxValidate(rules, messages)
+  },
+
+
 })

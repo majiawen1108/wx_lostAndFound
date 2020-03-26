@@ -1,4 +1,5 @@
 // pages/push/push.js
+import WxValidate from '../../utils/WxValidate.js'
 //获取应用实例
 const app = getApp()
 const URL = require("../../utils/url.js")
@@ -46,6 +47,18 @@ Page({
     //省市联动
     customItem: [],
     detailed: '',
+    //表单验证
+    form: {
+      search_title: '',
+      search_tel: '',
+      search_category: '',
+      search_date: '',
+      search_address: '',
+      search_det_address: '',
+      search_name: '',
+      search_QQ: '',
+      search_wx: ''
+    }
   },
   // picker
   picker: function (e) {
@@ -92,7 +105,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initValidate() //验证规则函数
   },
 
   /**
@@ -146,6 +159,13 @@ Page({
   subPush: function (e) {
     var that = this
     console.log(e.detail.value)
+    const params = e.detail.value
+    //校验表单
+    if (!that.WxValidate.checkForm(params)) {
+      const error = that.WxValidate.errorList[0]
+      that.showModal(error)
+      return false
+    }
     that.setData({
       search_title: e.detail.value.search_title,
       image: e.detail.value.image,
@@ -257,4 +277,82 @@ Page({
       }
     })
   },
+
+  //报错 
+  showModal(error) {
+    wx.showModal({
+      content: error.msg,
+      showCancel: false,
+    })
+  },
+  //验证函数
+  initValidate() {
+    const rules = {
+      search_title: {
+        required: true,
+        maxlength:8
+      },
+      search_tel: {
+        required: true,
+        tel: true
+      },
+      search_category: {
+        required: true
+      },
+      search_date: {
+        required: true
+      },
+      search_address: {
+        required: true
+      },
+      search_det_address: {
+        required: true
+      },
+      search_name: {
+        required: true
+      },
+      search_QQ: {
+        required: true,
+        digits:true
+      },
+      search_wx: {
+        required: true
+      }
+    }
+    const messages = {
+      search_title: {
+        required: '请填写标题',
+        maxlength:'标题最多8个字'
+      },
+      search_tel: {
+        required: '请填写手机号',
+        tel: '请填写正确的手机号'
+      },
+      search_category: {
+        required: '请选择类别',
+      },
+      search_date: {
+        required: '请选择拾获日期',
+      },
+      search_address: {
+        required: '请选择拾获地址'
+      },
+      search_det_address: {
+        required: '请输入详细地址'
+      },
+      search_name: {
+        required: '请输入您的姓名'
+      },
+      search_QQ: {
+        required: '请输入您的QQ',
+        digits:'QQ只能是数字'
+      },
+      search_wx: {
+        required: '请输入您的微信'
+      }
+    }
+    this.WxValidate = new WxValidate(rules, messages)
+  },
+
+
 })

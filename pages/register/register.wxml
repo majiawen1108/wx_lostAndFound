@@ -1,0 +1,27 @@
+<view class="all">
+  <view class="top">
+    用户注册
+  </view>
+  <view class="middle">
+    <form bindsubmit='registerIn'>
+      <view class='ui_cell'>
+        <text class='ui_cell_bd ui_cell_bd_must'>用户名:</text>
+        <input name="username" type="text" class='ui_cell_input' />
+      </view>
+
+      <view class="ui_cell">
+        <text class="ui_cell_bd ui_cell_bd_must">密码:</text>
+        <input name="password" type="password" class='ui_cell_input' />
+      </view>
+
+      <view class="ui_cell">
+        <text class='ui_cell_bd ui_cell_bd_must'>确认密码:</text>
+        <input name="passwordTwice" type="password" class='ui_cell_input' />
+      </view>
+     
+      <button formType="submit" type='primary' class='ui_btn ui_btn_primary'>立即注册</button>
+    </form>
+    <view class='ui_btn ui_btn_primary' bindtap='toLogin'>已有账号，去登陆</view>
+  </view>
+  
+</view>

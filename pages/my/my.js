@@ -20,7 +20,7 @@ Page({
   },
   exit:function(){
     wx.reLaunch({
-      url: '../index/index',
+      url: '../loginOn/loginOn',
     })
   },
   /**
