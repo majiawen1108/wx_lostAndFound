@@ -178,7 +178,7 @@ Page({
       search_date: e.detail.value.search_date,
       search_address: e.detail.value.search_address == '' ? '未填写' : e.detail.value.search_address,
       search_det_address: e.detail.value.search_det_address == '' ? '未填写' : e.detail.value.search_det_address,
-      money: e.detail.value.money == null ? '0' : e.detail.value.money,
+      money: e.detail.value.money == '' ? '0' : e.detail.value.money,
       search_details: e.detail.value.search_details == '' ? '未填写' : e.detail.value.search_details,
       search_name: e.detail.value.search_name == '' ? '未填写' : e.detail.value.search_name,
       search_tel: e.detail.value.search_tel == '' ? '未填写' : e.detail.value.search_tel,
@@ -186,6 +186,12 @@ Page({
       search_QQ: e.detail.value.search_QQ == '' ? '未填写' : e.detail.value.search_QQ,
 
     })
+    var switch1 = this.data.switch
+    if(switch1 == false){
+      switch1 = "否"
+    }else{
+      switch1 = "是"
+    }
     wx.request({
       url: URL.Search,
       data: {
@@ -195,7 +201,7 @@ Page({
         search_state: this.data.search_state,
         search_date: this.data.search_date,
         search_address: this.data.search_address,
-        paid: this.data.switch,
+        paid: switch1,
         search_det_address: this.data.search_det_address,
         money: this.data.money,
         search_details: this.data.note,

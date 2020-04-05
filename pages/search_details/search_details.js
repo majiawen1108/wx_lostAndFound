@@ -15,42 +15,24 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log(options)
-    //获取用户的登录信息
-    wx.getUserInfo({
-      success: res => {
+    wx.request({
+      url: URL.Search_QueryOne,
+      data: {
+        id: options.id,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        res = res.data
         console.log(res)
-        that.setData({
-          hasUserInfo: true,
-        })
-        var sexx = res.userInfo.gender
-        if (sexx = '1') {
-          sexx = '男'
-        } else {
-          sexx = '女'
-        }
-        wx.request({
-          url: URL.Search_QueryOne,
-          data: {
-            id: options.id,
-            def1: '123',
-            nickName: res.userInfo.nickName,
-            sex: sexx,
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            res = res.data
-            console.log(res)
 
-            that.setData({
-              'list': res
-            })
-          },
-          fail: function (res) {
-            console.log("获取数据失败，请检查服务器连接是否正常！");
-          }
+        that.setData({
+          'list': res
         })
+      },
+      fail: function (res) {
+        console.log("获取数据失败，请检查服务器连接是否正常！");
       }
     })
   },
@@ -63,7 +45,7 @@ Page({
   copy_wx: function () {
     console.log(this.data.list[0].found_wx)
     wx.setClipboardData({
-      data:this.data.list[0].found_wx,
+      data: this.data.list[0].found_wx,
       // success: function (res) {
       //   wx.showModal({
       //     title: '提示',
@@ -76,7 +58,7 @@ Page({
   copy_QQ: function () {
     console.log(this.data.list[0].found_QQ)
     wx.setClipboardData({
-      data:this.data.list[0].found_QQ,
+      data: this.data.list[0].found_QQ,
     })
   },
   /**

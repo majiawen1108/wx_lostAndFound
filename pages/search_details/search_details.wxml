@@ -12,16 +12,16 @@
       <view class="info-left">
         <view>信息编号：</view>
         <view>失主姓名：</view>
-        <view>拾获日期：{{item.search_date}}</view>
+        <view>丢失日期：{{item.search_date}}</view>
       </view>
       <view class="info-right">
-        <view class="">认领状态：{{item.search_state}}</view>
-        <view>证件号后六位：</view>
-        <view>标签：</view>
+        <view class="">寻物状态：{{item.search_state}}</view>
+        <view>是否有偿：{{item.paid}}</view>
+        <view>金额：{{item.money}}</view>
       </view>
     </view>
-    <view>拾获地区：{{item.search_address}}</view>
-    <view>拾获详细地点：{{item.search_det_address}}</view>
+    <view>丢失地区：{{item.search_address}}</view>
+    <view>丢失详细地点：{{item.search_det_address}}</view>
     <view>证件所属地址：</view>
     <view>详情：{{item.search_details}}</view>
     <view>发布日期：{{item.send_date}}</view>
