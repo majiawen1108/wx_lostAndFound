@@ -33,7 +33,7 @@ Page({
     found_tel: '',
     found_wx: '',
     found_QQ: '',
-    def1: '',
+    def1: '123',
     //类别
     pickList: [
       '卡类',
@@ -102,6 +102,11 @@ Page({
    */
   onLoad: function (options) {
     this.initValidate() //验证规则函数
+    console.log(app.globalData)
+    var openid = app.globalData.openid
+    this.setData({
+      def1:openid
+    })
   },
 
   /**
@@ -201,7 +206,7 @@ Page({
         found_wx: this.data.found_wx,
         found_QQ: this.data.found_QQ,
         //目前获取不到openid，暂时就是用123代替下
-        def1: '123'
+        def1: this.data.def1
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

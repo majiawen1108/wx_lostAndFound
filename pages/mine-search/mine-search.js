@@ -12,6 +12,10 @@ Page({
   },
 
   onLoad: function () {
+    var openid = app.globalData.openid
+    this.setData({
+      def1: openid
+    })
     this.queryMine()
   },
   /**
@@ -23,7 +27,7 @@ Page({
     wx.request({
       url: URL.Search_Delete,
       data: {
-        def1: '123',
+        def1: that.data.def1,
         id: this.data.id
       },
       header: {
@@ -124,43 +128,24 @@ Page({
   },
   queryMine: function () {
     var that = this;
-    //获取用户的登录信息
-    wx.getUserInfo({
-      success: res => {
+    wx.request({
+      url: URL.MineSearch,
+      data: {
+        def1: that.data.def1,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        res = res.data
         console.log(res)
         that.setData({
-          hasUserInfo: true,
+          'list': res,
+          check: 'true'
         })
-        var sexx = res.userInfo.gender
-        if (sexx = '1') {
-          sexx = '男'
-        } else {
-          sexx = '女'
-        }
-        wx.request({
-          url: URL.MineSearch,
-          data: {
-            def1: '123',
-            nickName: res.userInfo.nickName,
-            sex: sexx,
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            res = res.data
-            console.log(res)
-
-            that.setData({
-              'list': res,
-              check: 'true'
-            })
-          },
-          fail: function (res) {
-            console.log("获取数据失败，请检查服务器连接是否正常！");
-          }
-        })
-
+      },
+      fail: function (res) {
+        console.log("获取数据失败，请检查服务器连接是否正常！");
       }
     })
   },

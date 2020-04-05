@@ -1,7 +1,13 @@
 // var Url = 'http://172.20.10.4/laf/';
 // var Url = 'http://172.20.10.3/laf/';
 var Url = 'http://localhost/laf/';
+// var Url = 'http://192.168.42.178/laf/';
 module.exports = {
+
+  //授权登录
+  Login1:  Url + 'login.do',
+
+
   //拾金不昧主页查询
   indexQuery: Url + 'index.do',
   //拾金不昧主页标签列表查询

@@ -106,6 +106,10 @@ Page({
    */
   onLoad: function (options) {
     this.initValidate() //验证规则函数
+    var openid = app.globalData.openid
+    this.setData({
+      def1:openid
+    })
   },
 
   /**
@@ -200,7 +204,7 @@ Page({
         search_wx: this.data.search_wx,
         search_QQ: this.data.search_QQ,
         //目前获取不到openid，暂时就是用123代替下
-        def1: '123'
+        def1: this.data.def1
 
       },
       header: {

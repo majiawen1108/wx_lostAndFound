@@ -1,5 +1,6 @@
 {
-  "pages": [    
+  "pages": [   
+    "pages/index/index", 
     "pages/homePage/homePage",
     "pages/register/register",  
     "pages/loginOn/loginOn",
@@ -10,7 +11,6 @@
     "pages/details/details",
     "pages/search_details/search_details",
     "pages/test1/test1",
-    "pages/index/index",
     "pages/test/test",
     "pages/my/my",
     "pages/logs/logs",

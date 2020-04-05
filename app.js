@@ -1,15 +1,17 @@
 //app.js
+const URL = require('utils/url.js');
 App({
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+   
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        
       }
     })
     // 获取用户信息
@@ -20,8 +22,10 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
+              
               this.globalData.userInfo = res.userInfo
 
+              
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -34,6 +38,33 @@ App({
     })
   },
   globalData: {
-    userInfo: null
-  }
+    userInfo: null,
+    openid:null
+  },
+  // //登录获取code
+  // getOpenid: function () {
+  //   var that = this;
+  //   return new Promise(function (resolve, reject) {
+  //     wx.login({
+  //       success: function (res) {
+  //         console.log('code:' + res.code)
+  //         //发送请求
+  //         wx.request({
+  //           url: URL.Login1, //改成自己的服务器地址
+  //           data: {
+  //             code: res.code, //上面wx.login()成功获取到的code
+  //             operFlag: 'getOpenid',
+  //           },
+  //           header: {
+  //             'content-type': 'application/json' //默认值
+  //           },
+  //           success: function (res) {
+              
+             
+  //           }
+  //         })
+  //       }
+  //     })
+  //   });
+  // },
 })

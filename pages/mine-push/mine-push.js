@@ -10,10 +10,15 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     touchStart: '',
-    touchEnd: ''
+    touchEnd: '',
+    def1:''
   },
 
   onLoad: function () {
+    var openid = app.globalData.openid
+    this.setData({
+      def1:openid
+    })    
     this.queryMine()
   },
   /**
@@ -25,7 +30,7 @@ Page({
     wx.request({
       url: URL.Delete,
       data: {
-        def1: '123',
+        def1: that.data.def1,
         id: this.data.id
       },
       header: {
@@ -134,25 +139,10 @@ Page({
   },
   queryMine: function () {
     var that = this;
-    //获取用户的登录信息
-    wx.getUserInfo({
-      success: res => {
-        console.log(res)
-        that.setData({
-          hasUserInfo: true,
-        })
-        var sexx = res.userInfo.gender
-        if (sexx = '1') {
-          sexx = '男'
-        } else {
-          sexx = '女'
-        }
         wx.request({
           url: URL.MinePush,
           data: {
-            def1: '123',
-            nickName: res.userInfo.nickName,
-            sex: sexx,
+            def1: that.data.def1,
           },
           header: {
             'content-type': 'application/json'
@@ -169,9 +159,6 @@ Page({
             console.log("获取数据失败，请检查服务器连接是否正常！");
           }
         })
-
-      }
-    })
   },
   //单击单条数据和长按单条数据
   touchStart: function (e) {
