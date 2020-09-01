@@ -1,7 +1,7 @@
 /* pages/sendMsg/sendMsg.wxss */
 
 page {
-  background: url("http://img5.imgtn.bdimg.com/it/u=3464153292,37793627&fm=11&gp=0.jpg") no-repeat;
+  background: url("http://b-ssl.duitang.com/uploads/item/201609/03/20160903215800_EAwZX.thumb.700_0.jpeg") no-repeat;
   background-size: 100% 100%;
   overflow: hidden;
 }

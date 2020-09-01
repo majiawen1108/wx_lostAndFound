@@ -1,17 +1,21 @@
 // var Url = 'http://172.20.10.4/laf/';
-// var Url = 'http://172.20.10.3/laf/';
-var Url = 'http://localhost/laf/';
-// var Url = 'http://192.168.42.178/laf/';
+var Url = 'http://172.20.10.3/laf/';
+// var Url = 'http://localhost/laf/';
+// var Url = 'http://192.168.1.109/laf/';
+// var Url = 'http://31786j974v.wicp.vip/laf/';
 module.exports = {
 
   //授权登录
-  Login1:  Url + 'login.do',
+  Login1: Url + 'login.do',
 
 
   //拾金不昧主页查询
   indexQuery: Url + 'index.do',
   //拾金不昧主页标签列表查询
   indexByTag: Url + 'indexbytag.do',
+  //拾金不昧主页搜索
+  indexByInput: Url + 'indexbyinput.do',
+
   //拾金不昧主页单条详情查询
   QueryOne: Url + 'queryone.do',
   //我发表的拾物招领删除功能
@@ -30,6 +34,8 @@ module.exports = {
   Search_indexByTag: Url + 'search-indexbytag.do',
   //丢三落四主页查询
   Search_indexQuery: Url + 'search-index.do',
+  //丢三落四主页搜索
+  Search_indexByInput: Url + 'search_indexbyinput.do',
   //丢三落四主页单条详情查询
   Search_QueryOne: Url + 'search-queryone.do',
   //我发表的失物查询
@@ -41,5 +47,5 @@ module.exports = {
 
   //登录注册
   LoginOn: Url + 'userlogin.do',
-  Register:Url + 'userregister.do'
+  Register: Url + 'userregister.do'
 }

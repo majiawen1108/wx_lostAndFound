@@ -198,7 +198,7 @@ Page({
             wx.request({
               url: URL.Update,
               data: {
-                def1: '123',
+                def1:  that.data.def1,
                 id:queryone
               },
               header: {

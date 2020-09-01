@@ -218,7 +218,35 @@ Page({
      
   },
   search: function (e) {
+    var that = this
     console.log(e.detail.value)
+    var InputMsg = e.detail.value
+    var url = null
+    if(that.data.barIndex == 1){
+      url = URL.Search_indexByInput
+    }else{
+      url = URL.indexByInput
+    }
+    wx.request({
+      url: url,
+      data:{
+        InputMsg: InputMsg
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        res = res.data
+        console.log(res)
+
+        that.setData({
+          'list': res
+        })
+      },
+      fail: function (res) {
+        console.log("获取数据失败，请检查服务器连接是否正常！");
+      }
+    })
     this.setData({
       searchInput: e.detail.value
     })
